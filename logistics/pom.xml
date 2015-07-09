@@ -11,9 +11,9 @@
     <name>Log IOT Challange</name>
 
     <modules>
-        <module>log-persist</module>
-        <module>log-service</module>
-		<module>log-web</module>
+        <module>logistics-persistence</module>
+        <module>logistics-service</module>
+		<module>logistics-web</module>
     </modules>
 
     <build>
