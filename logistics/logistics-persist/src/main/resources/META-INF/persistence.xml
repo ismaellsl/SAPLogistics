@@ -4,14 +4,13 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
              version="1.0">
              
-	<persistence-unit name="jpaeficaz" transaction-type="RESOURCE_LOCAL">
-		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	<persistence-unit name="Logistics" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
-		<class>sap,logistics.persistence.Bus</class>
+		<class>sap.logistics.persistence.Bus</class>
 		
 		<properties>
-
-		 	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpaeficaz" />
+		 	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/logistics" />
 		 	<property name="javax.persistence.jdbc.user" value="root" />
       		<property name="javax.persistence.jdbc.password" value="admin" />
       		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
