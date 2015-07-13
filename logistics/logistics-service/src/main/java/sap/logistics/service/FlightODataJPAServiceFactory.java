@@ -6,7 +6,7 @@ import org.apache.olingo.odata2.jpa.processor.api.exception.ODataJPARuntimeExcep
 import org.apache.olingo.odata2.jpa.processor.ref.factory.JPAEntityManagerFactory;
 
 public class FlightODataJPAServiceFactory extends ODataJPAServiceFactory {
-	private static final String PUNIT_NAME = "flight-persistence";
+	private static final String PUNIT_NAME = "logistics";
 
 	@Override
 	public ODataJPAContext initializeODataJPAContext()
