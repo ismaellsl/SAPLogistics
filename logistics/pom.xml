@@ -8,10 +8,10 @@
     <artifactId>log</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
-    <name>Log IOT Challange</name>
+    <name>Log IOT Challenge</name>
 
     <modules>
-        <module>logistics-persistence</module>
+        <module>logistics-persist</module>
         <module>logistics-service</module>
 		<module>logistics-web</module>
     </modules>
