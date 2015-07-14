@@ -16,7 +16,7 @@ sap.ui
 														evt.to.setModel(evt.data.oModel);
 														evt.to.setBindingContext(evt.data);
 													} else {
-														var oModel = new sap.ui.model.odata.ODataModel("FlightOData.svc/");
+														var oModel = new sap.ui.model.odata.ODataModel("LogisticsOData.svc/");
 														evt.to.setModel(oModel);
 														evt.to.byId("departure").setValue("");
 														evt.to.byId("destination").setValue("");
@@ -34,7 +34,7 @@ sap.ui
 					handleDeletePress : function() {
 						var oModel = this.getView().getModel();
 						var flightid = this.getView().byId("id").getValue();
-						oModel.remove("/Flights(" + flightid + "L)");
+						oModel.remove("/Logistics(" + flightid + "L)");
 						oModel.refresh();
 						app.back();
 
@@ -51,7 +51,7 @@ sap.ui
 								"destination").getValue();
 						if (vProperties.Id == "") {
 							vProperties.Id = 0;
-							oModel.createEntry("Flights", vProperties);
+							oModel.createEntry("Logistics", vProperties);
 
 						} else {
 							var oEntry = {};

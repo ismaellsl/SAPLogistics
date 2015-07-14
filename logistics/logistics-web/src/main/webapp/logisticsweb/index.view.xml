@@ -8,7 +8,7 @@
 			itemPress="rowSelected">
 			<headerToolbar>
 				<Toolbar>
-					<Label text="Flights"></Label>
+					<Label text="Logistics"></Label>
 				</Toolbar>
 			</headerToolbar>
 			<columns>

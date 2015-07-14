@@ -20,11 +20,11 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>JPARefScenarioServlet</servlet-name>
-		<url-pattern>/FlightOData.svc/*</url-pattern>
+		<url-pattern>/LogisticsOData.svc/*</url-pattern>
 	</servlet-mapping>
 	<filter>
 		<filter-name>CORS</filter-name>
-		<filter-class>allan.flight.service.CORSFilter</filter-class>
+		<filter-class>sap.logistics.service.CORSFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>CORS</filter-name>
