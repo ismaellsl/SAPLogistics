@@ -17,5 +17,4 @@ public class FlightODataJPAServiceFactory extends ODataJPAServiceFactory {
 		oDataJPAContext.setPersistenceUnitName(PUNIT_NAME);
 		return oDataJPAContext;
 	}
-
 }

@@ -8,14 +8,12 @@ public class PersistenceTest {
 	
 	public static void main(String[] args){
 		/*
-
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Logistics");
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist();
 		em.getTransaction().commit();
 		em.close(); 
-		
 		*/
 		
 	}
