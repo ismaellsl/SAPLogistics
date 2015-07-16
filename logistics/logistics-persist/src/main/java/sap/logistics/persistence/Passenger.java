@@ -1,6 +1,7 @@
 package sap.logistics.persistence;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -9,12 +10,25 @@ public class Passenger implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	private int id;
 	
 	private String name;
 	private String registration;
 	private long mobileNumber;
 	private String email;
+	
+	@ManyToOne
+	@JoinColumn(name = "route_id")
+	private Route route;
+	
+	public Route getRoute() {
+		return route;
+	}
+	
+	public void setRoute(Route route) {
+		this.route = route;
+	}
 	public String getName() {
 		return name;
 	}

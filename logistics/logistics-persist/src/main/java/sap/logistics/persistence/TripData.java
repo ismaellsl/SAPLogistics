@@ -10,6 +10,7 @@ public class TripData implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	private int id;
 	
 	private Date dateTime;

@@ -10,7 +10,39 @@ public class Trip implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	private int id;
+	
+	@ManyToOne
+	@JoinColumn(name = "vehicle_id")
+	
+	private Vehicle vehicle;
+	
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+	public Driver getDriver() {
+		return driver;
+	}
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+	public Route getRoute() {
+		return route;
+	}
+	public void setRoute(Route route) {
+		this.route = route;
+	}
+	@ManyToOne
+	@JoinColumn(name = "driver_id")
+	private Driver driver;
+	
+	@ManyToOne
+	@JoinColumn(name = "route_id")
+	private Route route;
 	
 	private Date date;
 	private Date departureTime;
