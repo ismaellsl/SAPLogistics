@@ -44,6 +44,9 @@ public class Trip implements Serializable {
 	@JoinColumn(name = "route_id")
 	private Route route;
 	
+	@OneToMany(mappedBy = "trip")
+	private TripData tripData;
+	
 	private Date date;
 	private Date departureTime;
 	private Date arrivalTime;

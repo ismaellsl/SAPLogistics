@@ -18,6 +18,10 @@ public class TripData implements Serializable{
 	private long speed;
 	private long fuelLevel;
 	
+	@ManyToOne
+	@JoinColumn(name = "trip_id")
+	private Trip trip;
+	
 	public Date getDateTime() {
 		return dateTime;
 	}
