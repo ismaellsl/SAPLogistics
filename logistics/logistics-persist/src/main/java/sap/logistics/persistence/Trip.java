@@ -47,6 +47,12 @@ public class Trip implements Serializable {
 	@OneToMany(mappedBy = "trip")
 	private TripData tripData;
 	
+	public TripData getTripData() {
+		return tripData;
+	}
+	public void setTripData(TripData tripData) {
+		this.tripData = tripData;
+	}
 	private Date date;
 	private Date departureTime;
 	private Date arrivalTime;
