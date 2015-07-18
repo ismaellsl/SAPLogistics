@@ -10,9 +10,12 @@ public class Passenger implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
+	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
 	
+	public int getId() {
+		return id;
+	}
 	private String name;
 	private String registration;
 	private long mobileNumber;

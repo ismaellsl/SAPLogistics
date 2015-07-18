@@ -2,6 +2,7 @@ package sap.logistics.persistence;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ public class Trip implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
+	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
 	
 	@ManyToOne
@@ -18,24 +19,6 @@ public class Trip implements Serializable {
 	
 	private Vehicle vehicle;
 	
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-	public Driver getDriver() {
-		return driver;
-	}
-	public void setDriver(Driver driver) {
-		this.driver = driver;
-	}
-	public Route getRoute() {
-		return route;
-	}
-	public void setRoute(Route route) {
-		this.route = route;
-	}
 	@ManyToOne
 	@JoinColumn(name = "driver_id")
 	private Driver driver;
@@ -45,19 +28,14 @@ public class Trip implements Serializable {
 	private Route route;
 	
 	@OneToMany(mappedBy = "trip")
-	private TripData tripData;
+	private List<TripData> tripDatas;
 	
-	public TripData getTripData() {
-		return tripData;
-	}
-	public void setTripData(TripData tripData) {
-		this.tripData = tripData;
-	}
 	private Date date;
 	private Date departureTime;
 	private Date arrivalTime;
 	private int passengerNr;
 	private long distance;
+	
 	public Date getDate() {
 		return date;
 	}
@@ -91,5 +69,28 @@ public class Trip implements Serializable {
 	public int getId() {
 		return id;
 	}
-
+	public List<TripData> getTripDatas() {
+		return tripDatas;
+	}
+	public void setTripDatas(List<TripData> tripDatas) {
+		this.tripDatas = tripDatas;
+	}
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+	public Driver getDriver() {
+		return driver;
+	}
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+	public Route getRoute() {
+		return route;
+	}
+	public void setRoute(Route route) {
+		this.route = route;
+	}
 }

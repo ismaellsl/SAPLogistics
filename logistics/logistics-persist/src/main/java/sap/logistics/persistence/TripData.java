@@ -10,7 +10,7 @@ public class TripData implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
+	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
 	
 	private Date dateTime;
@@ -22,6 +22,9 @@ public class TripData implements Serializable{
 	@JoinColumn(name = "trip_id")
 	private Trip trip;
 	
+	public int getId() {
+		return id;
+	}
 	public Trip getTrip() {
 		return trip;
 	}

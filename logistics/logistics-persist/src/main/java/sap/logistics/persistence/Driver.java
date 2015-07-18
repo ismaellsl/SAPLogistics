@@ -10,7 +10,7 @@ public class Driver implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
+	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
 	
 	private String name;
@@ -43,5 +43,8 @@ public class Driver implements Serializable{
 	}
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+	public int getId() {
+		return id;
 	}
 }

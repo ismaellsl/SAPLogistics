@@ -10,7 +10,7 @@ public class Vehicle implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
+	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
 	
 	private String plate;
@@ -18,6 +18,12 @@ public class Vehicle implements Serializable{
 	private String fuelType;
 	private String fiscalNumber;
 	private int capacity;
+	private String model;
+	private String vehicleInscription;
+	private int year;
+	
+	@OneToMany(mappedBy = "vehicle")
+	private List<Trip> trips;
 	
 	public List<Trip> getTrips() {
 		return trips;
@@ -26,13 +32,6 @@ public class Vehicle implements Serializable{
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
 	}
-
-	private String model;
-	private String vehicleInscription;
-	private int year;
-	
-	@OneToMany(mappedBy = "vehicle")
-	private List<Trip> trips;
 	
 	public String getPlate() {
 		return plate;
@@ -96,5 +95,8 @@ public class Vehicle implements Serializable{
 	
 	public void setYear(int year) {
 		this.year = year;
+	}
+	public int getId() {
+		return id;
 	}
 }
