@@ -19,9 +19,6 @@
     <buildCommand>
       <name>org.eclipse.wst.validation.validationbuilder</name>
     </buildCommand>
-    <buildCommand>
-      <name>org.eclipse.jst.j2ee.ejb.annotations.xdoclet.xdocletbuilder</name>
-    </buildCommand>
   </buildSpec>
   <natures>
     <nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
