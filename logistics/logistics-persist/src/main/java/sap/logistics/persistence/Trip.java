@@ -2,6 +2,7 @@ package sap.logistics.persistence;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.*;
@@ -30,30 +31,13 @@ public class Trip implements Serializable {
 	@OneToMany(mappedBy = "trip")
 	private List<TripData> tripDatas;
 	
-	private Date date;
-	private Date departureTime;
-	private Date arrivalTime;
+	private GregorianCalendar date;
+	private GregorianCalendar departureTime;
+	private GregorianCalendar arrivalTime;
 	private int passengerNr;
 	private long distance;
 	
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public Date getDepartureTime() {
-		return departureTime;
-	}
-	public void setDepartureTime(Date departureTime) {
-		this.departureTime = departureTime;
-	}
-	public Date getArrivalTime() {
-		return arrivalTime;
-	}
-	public void setArrivalTime(Date arrivalTime) {
-		this.arrivalTime = arrivalTime;
-	}
+	
 	public int getPassengerNr() {
 		return passengerNr;
 	}
@@ -92,5 +76,23 @@ public class Trip implements Serializable {
 	}
 	public void setRoute(Route route) {
 		this.route = route;
+	}
+	public GregorianCalendar getDate() {
+		return date;
+	}
+	public void setDate(GregorianCalendar date) {
+		this.date = date;
+	}
+	public GregorianCalendar getDepartureTime() {
+		return departureTime;
+	}
+	public void setDepartureTime(GregorianCalendar departureTime) {
+		this.departureTime = departureTime;
+	}
+	public GregorianCalendar getArrivalTime() {
+		return arrivalTime;
+	}
+	public void setArrivalTime(GregorianCalendar arrivalTime) {
+		this.arrivalTime = arrivalTime;
 	}
 }

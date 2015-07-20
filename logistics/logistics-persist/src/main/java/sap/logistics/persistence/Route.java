@@ -2,6 +2,7 @@ package sap.logistics.persistence;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.*;
@@ -39,8 +40,8 @@ public class Route implements Serializable{
 	private String depertureLocation;
 	private String arrivalLocation;
 	private long distance;
-	private Date departureTime;
-	private Date arrivalTime;
+	private GregorianCalendar departureTime;
+	private GregorianCalendar arrivalTime;
 	
 	public String getDepertureLocation() {
 		return depertureLocation;
@@ -60,16 +61,16 @@ public class Route implements Serializable{
 	public void setDistance(long distance) {
 		this.distance = distance;
 	}
-	public Date getDepartureTime() {
+	public GregorianCalendar getDepartureTime() {
 		return departureTime;
 	}
-	public void setDepartureTime(Date departureTime) {
+	public void setDepartureTime(GregorianCalendar departureTime) {
 		this.departureTime = departureTime;
 	}
-	public Date getArrivalTime() {
+	public GregorianCalendar getArrivalTime() {
 		return arrivalTime;
 	}
-	public void setArrivalTime(Date arrivalTime) {
+	public void setArrivalTime(GregorianCalendar arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
