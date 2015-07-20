@@ -1,5 +1,9 @@
 /build
 /bin
-*/target/** 
+*/target/**
+*/.settings/**
+*/.classpath
 .classpath
+*/.project
 .project
+.classpath
