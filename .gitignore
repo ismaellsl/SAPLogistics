@@ -1,5 +1,6 @@
 /build
 /bin
+*/target/*
 */target/**
 */.settings/**
 */.classpath
@@ -7,3 +8,7 @@
 */.project
 .project
 .classpath
+.classpath
+.project
+.settings/
+target/
