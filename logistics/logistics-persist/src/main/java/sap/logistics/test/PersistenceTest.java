@@ -14,7 +14,7 @@ public class PersistenceTest {
 		passanger.setMobileNumber(99887766);
 		passanger.setName("Tester");
 		passanger.setRegistration("1234567890");
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Logistics");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("logistics");
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(passanger);
