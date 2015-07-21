@@ -1,8 +1,10 @@
-package sap.logistics.persistence;
+package sap.logistics.test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import sap.logistics.persistence.Passenger;
 
 public class PersistenceTest {
 	

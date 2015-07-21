@@ -1,11 +1,22 @@
 package sap.logistics.persistence;
 
 import java.io.Serializable;
+<<<<<<< HEAD
 import java.util.Date;
+=======
+>>>>>>> 8b1f28f7529a5ab1487db7e2a1bd402865890cbc
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Trip implements Serializable {
@@ -30,9 +41,13 @@ public class Trip implements Serializable {
 	
 	@OneToMany(mappedBy = "trip")
 	private List<TripData> tripDatas;
-	
+
+	@Temporal(TemporalType.DATE)
 	private Calendar date;
+	@Temporal(TemporalType.TIME)
 	private Calendar departureTime;
+	@Temporal(TemporalType.TIME)
+
 	private Calendar arrivalTime;
 	private int passengerNr;
 	private long distance;
@@ -95,4 +110,6 @@ public class Trip implements Serializable {
 	public void setArrivalTime(Calendar arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
+	
+
 }

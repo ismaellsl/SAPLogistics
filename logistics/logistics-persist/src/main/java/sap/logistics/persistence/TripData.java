@@ -2,8 +2,19 @@ package sap.logistics.persistence;
 
 import java.io.Serializable;
 import java.util.Calendar;
+<<<<<<< HEAD
+=======
+import java.util.GregorianCalendar;
+>>>>>>> 8b1f28f7529a5ab1487db7e2a1bd402865890cbc
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class TripData implements Serializable{
@@ -12,7 +23,8 @@ public class TripData implements Serializable{
 	@Id
 	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
-	
+
+	@Temporal(TemporalType.TIME)
 	private Calendar dateTime;
 	private long engineRPM;
 	private long speed;
@@ -56,5 +68,6 @@ public class TripData implements Serializable{
 	public void setDateTime(Calendar dateTime) {
 		this.dateTime = dateTime;
 	}
+
 	
 }
