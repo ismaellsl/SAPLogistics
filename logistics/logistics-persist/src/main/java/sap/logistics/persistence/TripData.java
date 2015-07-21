@@ -1,7 +1,7 @@
 package sap.logistics.persistence;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
+import java.util.Calendar;
 
 import javax.persistence.*;
 
@@ -13,7 +13,7 @@ public class TripData implements Serializable{
 	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
 	
-	private GregorianCalendar dateTime;
+	private Calendar dateTime;
 	private long engineRPM;
 	private long speed;
 	private long fuelLevel;
@@ -50,10 +50,10 @@ public class TripData implements Serializable{
 	public void setFuelLevel(long fuelLevel) {
 		this.fuelLevel = fuelLevel;
 	}
-	public GregorianCalendar getDateTime() {
+	public Calendar getDateTime() {
 		return dateTime;
 	}
-	public void setDateTime(GregorianCalendar dateTime) {
+	public void setDateTime(Calendar dateTime) {
 		this.dateTime = dateTime;
 	}
 	
