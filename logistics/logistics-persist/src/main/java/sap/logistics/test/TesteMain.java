@@ -1,12 +1,19 @@
-package sap.logistics.persistence;
+package sap.logistics.test;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import sap.logistics.persistence.Driver;
+import sap.logistics.persistence.Passenger;
+import sap.logistics.persistence.Route;
+import sap.logistics.persistence.Trip;
+import sap.logistics.persistence.Vehicle;
 
 public class TesteMain {
 
@@ -19,8 +26,8 @@ public class TesteMain {
 
 		List<Trip> trips = new ArrayList<Trip>();
 		List<Passenger> passenger = new ArrayList<Passenger>();
-		Date data = new Date();
-		
+		Calendar data = new GregorianCalendar();
+				
 		
 		while (numero != 4) {
 			entityManager.getTransaction().begin();

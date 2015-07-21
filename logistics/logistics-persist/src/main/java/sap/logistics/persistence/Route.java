@@ -1,11 +1,17 @@
 package sap.logistics.persistence;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -40,8 +46,10 @@ public class Route implements Serializable{
 	private String depertureLocation;
 	private String arrivalLocation;
 	private long distance;
-	private GregorianCalendar departureTime;
-	private GregorianCalendar arrivalTime;
+	@Temporal(TemporalType.TIME)
+	private Calendar departureTime;
+	@Temporal(TemporalType.TIME)
+	private Calendar arrivalTime;
 	
 	public String getDepertureLocation() {
 		return depertureLocation;
@@ -61,17 +69,18 @@ public class Route implements Serializable{
 	public void setDistance(long distance) {
 		this.distance = distance;
 	}
-	public GregorianCalendar getDepartureTime() {
+	public Calendar getDepartureTime() {
 		return departureTime;
 	}
-	public void setDepartureTime(GregorianCalendar departureTime) {
+	public void setDepartureTime(Calendar departureTime) {
 		this.departureTime = departureTime;
 	}
-	public GregorianCalendar getArrivalTime() {
+	public Calendar getArrivalTime() {
 		return arrivalTime;
 	}
-	public void setArrivalTime(GregorianCalendar arrivalTime) {
+	public void setArrivalTime(Calendar arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
+
 
 }

@@ -1,9 +1,17 @@
 package sap.logistics.persistence;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class TripData implements Serializable{
@@ -12,8 +20,8 @@ public class TripData implements Serializable{
 	@Id
 	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
-	
-	private GregorianCalendar dateTime;
+	@Temporal(TemporalType.TIME)
+	private Calendar dateTime;
 	private long engineRPM;
 	private long speed;
 	private long fuelLevel;
@@ -50,11 +58,12 @@ public class TripData implements Serializable{
 	public void setFuelLevel(long fuelLevel) {
 		this.fuelLevel = fuelLevel;
 	}
-	public GregorianCalendar getDateTime() {
+	public Calendar getDateTime() {
 		return dateTime;
 	}
-	public void setDateTime(GregorianCalendar dateTime) {
+	public void setDateTime(Calendar dateTime) {
 		this.dateTime = dateTime;
 	}
+
 	
 }
