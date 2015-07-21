@@ -37,12 +37,13 @@ public class Trip implements Serializable {
 	
 	@OneToMany(mappedBy = "trip")
 	private List<TripData> tripDatas;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Calendar date;
 	@Temporal(TemporalType.TIME)
 	private Calendar departureTime;
 	@Temporal(TemporalType.TIME)
+
 	private Calendar arrivalTime;
 	private int passengerNr;
 	private long distance;

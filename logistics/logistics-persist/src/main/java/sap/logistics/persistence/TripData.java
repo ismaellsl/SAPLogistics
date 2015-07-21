@@ -2,8 +2,6 @@ package sap.logistics.persistence;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +18,7 @@ public class TripData implements Serializable{
 	@Id
 	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
+
 	@Temporal(TemporalType.TIME)
 	private Calendar dateTime;
 	private long engineRPM;

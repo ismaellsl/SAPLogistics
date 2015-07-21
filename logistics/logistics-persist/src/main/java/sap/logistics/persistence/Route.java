@@ -2,7 +2,6 @@ package sap.logistics.persistence;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -46,8 +45,10 @@ public class Route implements Serializable{
 	private String depertureLocation;
 	private String arrivalLocation;
 	private long distance;
+	
 	@Temporal(TemporalType.TIME)
 	private Calendar departureTime;
+	
 	@Temporal(TemporalType.TIME)
 	private Calendar arrivalTime;
 	
