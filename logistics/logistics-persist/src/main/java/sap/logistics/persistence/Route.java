@@ -1,13 +1,7 @@
 package sap.logistics.persistence;
 
 import java.io.Serializable;
-<<<<<<< HEAD
-import java.util.Date;
 import java.util.Calendar;
-=======
-import java.util.Calendar;
-import java.util.GregorianCalendar;
->>>>>>> 8b1f28f7529a5ab1487db7e2a1bd402865890cbc
 import java.util.List;
 
 import javax.persistence.Entity;
