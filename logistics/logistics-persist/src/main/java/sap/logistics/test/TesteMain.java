@@ -19,29 +19,27 @@ public class TesteMain {
 
 	public static void main(String[] args) {
 		int numero = 1;
-		
+
 		EntityManagerFactory teste = Persistence
-				.createEntityManagerFactory("Logistics");
+				.createEntityManagerFactory("logistics");
 		EntityManager entityManager = teste.createEntityManager();
 
 		List<Trip> trips = new ArrayList<Trip>();
 		List<Passenger> passenger = new ArrayList<Passenger>();
 		Calendar data = new GregorianCalendar();
-				
-		
+
 		while (numero != 4) {
 			entityManager.getTransaction().begin();
 
-		
 			Driver drive = new Driver();
 			Passenger pass = new Passenger();
 			Route rout = new Route();
 			Trip tri = new Trip();
 			Vehicle veh = new Vehicle();
-			
+
 			trips.add(tri);
 			passenger.add(pass);
-			
+
 			drive.setName("Motorista " + numero);
 			drive.setRegistration("Registro " + numero);
 			drive.setPicture("Foto " + numero);
@@ -59,17 +57,17 @@ public class TesteMain {
 			rout.setPassagers(passenger);
 			rout.setArrivalTime(data);
 			rout.setDepartureTime(data);
-			
+
 			veh.setCapacity(numero);
 			veh.setChassi("Chassi" + numero);
 			veh.setFiscalNumber("numero fiscal" + numero);
 			veh.setFuelType("Tipo " + numero);
 			veh.setModel("Modelo " + numero);
-			veh.setPlate("Plate "+ numero);
+			veh.setPlate("Plate " + numero);
 			veh.setTrips(trips);
 			veh.setVehicleInscription("Inscription" + numero);
 			veh.setYear(numero);
-			
+
 			tri.setArrivalTime(data);
 			tri.setDate(data);
 			tri.setDepartureTime(data);
@@ -84,11 +82,10 @@ public class TesteMain {
 			entityManager.persist(tri);
 			entityManager.persist(veh);
 			entityManager.persist(pass);
-			
+
 			entityManager.getTransaction().commit();
-			
+
 			numero++;
-			
 
 		}
 
