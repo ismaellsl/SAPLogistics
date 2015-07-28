@@ -21,8 +21,30 @@ public class TripData implements Serializable{
 
 	@Temporal(TemporalType.TIME)
 	private Calendar dateTime;
+	
 	private long engineRPM;
+	private long xAxis;
+	private long yAxis;
+	private long zAxis;
 	private long speed;
+	public long getxAxis() {
+		return xAxis;
+	}
+	public void setxAxis(long xAxis) {
+		this.xAxis = xAxis;
+	}
+	public long getyAxis() {
+		return yAxis;
+	}
+	public void setyAxis(long yAxis) {
+		this.yAxis = yAxis;
+	}
+	public long getzAxis() {
+		return zAxis;
+	}
+	public void setzAxis(long zAxis) {
+		this.zAxis = zAxis;
+	}
 	private long fuelLevel;
 	
 	@ManyToOne
@@ -57,12 +79,17 @@ public class TripData implements Serializable{
 	public void setFuelLevel(long fuelLevel) {
 		this.fuelLevel = fuelLevel;
 	}
+	
 	public Calendar getDateTime() {
 		return dateTime;
 	}
 	public void setDateTime(Calendar dateTime) {
 		this.dateTime = dateTime;
 	}
-
-	
+	@Override
+	public String toString() {
+		return "TripData [id=" + id + ", dateTime=" + dateTime + ", engineRPM=" + engineRPM + ", xAxis=" + xAxis
+				+ ", yAxis=" + yAxis + ", zAxis=" + zAxis + ", speed=" + speed + ", fuelLevel=" + fuelLevel + ", trip="
+				+ trip + "]";
+	}
 }

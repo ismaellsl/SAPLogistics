@@ -79,7 +79,7 @@ public class TesteMain {
 			tri.setRoute(rout);
 			tri.setVehicle(veh);
 			
-			tridata.setDateTime(data);
+			//tridata.setDateTime(data);
 			tridata.setEngineRPM((long) Math.random()*101);
 			tridata.setFuelLevel((long) Math.random()*101);
 			tridata.setSpeed((long) Math.random()*101);

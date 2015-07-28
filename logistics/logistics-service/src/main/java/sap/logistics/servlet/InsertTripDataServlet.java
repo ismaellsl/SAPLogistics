@@ -3,12 +3,18 @@ package sap.logistics.servlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Stack;
 
 import javax.json.Json;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParserFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.json.stream.JsonParser.Event;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,102 +25,143 @@ import sap.logistics.persistence.TripData;
 
 public class InsertTripDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("logistics");
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		BufferedReader br = req.getReader();
+		br.readLine();br.readLine();br.readLine();
 		String line;
 		String text = "";
 		while((line = br.readLine()) != null){
+			if(line.contains("WebKitFormBoundary"))
+				line = "";
 			text = text.concat("\n" + line);
 		}
-		text = text.substring(text.indexOf('['), text.indexOf(']'));
+		
+		text = text.trim();
 		JsonParserFactory factory = Json.createParserFactory(null);
 		JsonParser parser = factory.createParser(new StringReader(text));
 		Stack<String> stack = new Stack<>();
 		TripData tripData = new TripData();
+		List<TripData> tripDataList = new ArrayList<>();
 		String busId = "";
+		int counter = 0;
 		while (parser.hasNext()) {
-		  Event event = parser.next();
+			try{
+			  Event event = parser.next();
+			  switch (event) {
+				  case START_OBJECT: {
+				  		counter++;
+				    	break;
+				    }
+				  	case END_OBJECT: {
+				  		counter--;
+				  		if(counter == 0){
+				  			tripDataList.add(tripData);
+				  			tripData = new TripData();
+				  		}
+				  		break;
+				    }
+				    case KEY_NAME: {
+				    	stack.push(parser.getString());
+				    	break;
+				    }
+				    case VALUE_STRING: {
+				    	String value = parser.getString(); 
+				    	switch (stack.pop()){
+				    		case "timeStamp":{
+				    			Calendar calendar = new GregorianCalendar();
+				    			calendar.setTimeInMillis(Long.parseLong(value));
+				    			tripData.setDateTime(calendar);
+				    			break;
+				    		}
+				    		case "engineRPM":{
+				    			tripData.setEngineRPM(Long.parseLong(value));
+				    			break;
+				    		}
+				    		case "speed":{
+				    			tripData.setSpeed(Long.parseLong(value));
+				    			break;
+				    		}
+				    		case "fuelLevel":{
+				    			tripData.setFuelLevel(Long.parseLong(value));
+				    			break;
+				    		}
+				    		case "id":{
+				    			busId = value;
+				    			break;
+				    		}
+				    		case "xAxis":{
+				    			tripData.setxAxis(Long.parseLong(value));
+				    			break;
+				    		}
+				    		case "yAxis":{
+				    			tripData.setyAxis(Long.parseLong(value));
+				    			break;
+				    		}
+				    		case "zAxis":{
+				    			tripData.setzAxis(Long.parseLong(value));
+				    			break;
+				    		}
+				    	} 
+				    	break;
+				    }
+				    case VALUE_NUMBER: {
+				    	String value = parser.getString(); 
+				    	switch (stack.pop()){
+					    	case "id":{
+				    			busId = value;
+				    			break;
+				    		}
+				    		case "timeStamp":{
+				    			Calendar calendar = new GregorianCalendar();
+				    			calendar.setTimeInMillis(Long.parseLong(value));
+				    			tripData.setDateTime(calendar);
+				    			break;
+				    		}
+				    		case "engineRPM":{
+				    			tripData.setEngineRPM(Long.parseLong(value));
+				    			break;
+				    		}
+				    		case "speed":{
+				    			tripData.setSpeed(Long.parseLong(value));
+				    			break;
+				    		}
+				    		case "fuelLevel":{
+				    			tripData.setFuelLevel(Long.parseLong(value));
+				    			break;
+				    		}
+				    		case "xAxis":{
+				    			tripData.setxAxis(Long.parseLong(value));
+				    			break;
+				    		}
+				    		case "yAxis":{
+				    			tripData.setyAxis(Long.parseLong(value));
+				    			break;
+				    		}
+				    		case "zAxis":{
+				    			tripData.setzAxis(Long.parseLong(value));
+				    			break;
+				    		}
+				    	} 
+				    break;
+				    }
+				  }
+			}catch(Exception e){
+				resp.getWriter().println("Some errors occured");
+			}
 
-		  switch (event) {
-		    case KEY_NAME: {
-		    	stack.push(parser.getString());
-		    	break;
-		    }
-		    case VALUE_STRING: {
-		    	String value = parser.getString(); 
-		    	switch (stack.pop()){
-		    		case "timeStamp":{
-		    			tripData.setDateTime(
-		    					new GregorianCalendar(
-		    							Integer.parseInt(value.substring(0, 4).trim()), 
-		    							Integer.parseInt(value.substring(4, 6).trim()), 
-		    							Integer.parseInt(value.substring(6, 8).trim()), 
-		    							Integer.parseInt(value.substring(8, 10).trim()), 
-		    							Integer.parseInt(value.substring(10, 12).trim()), 
-		    							Integer.parseInt(value.substring(12, 14).trim())
-		    							)
-		    					);
-		    			break;
-		    		}
-		    		case "engineRPM":{
-		    			tripData.setEngineRPM(Integer.parseInt(value));
-		    			break;
-		    		}
-		    		case "speed":{
-		    			tripData.setSpeed(Integer.parseInt(value));
-		    			break;
-		    		}
-		    		case "fuelLevel":{
-		    			tripData.setFuelLevel(Integer.parseInt(value));
-		    			break;
-		    		}
-		    		case "id":{
-		    			busId = value;
-		    			break;
-		    		}
-		    	} 
-		    	break;
-		    }
-		    case VALUE_NUMBER: {
-		    	String value = parser.getString(); 
-		    	switch (stack.pop()){
-	    		case "timeStamp":{
-	    			tripData.setDateTime(
-	    					new GregorianCalendar(
-	    							Integer.parseInt(value.substring(0, 4).trim()), 
-	    							Integer.parseInt(value.substring(4, 6).trim()), 
-	    							Integer.parseInt(value.substring(6, 8).trim()), 
-	    							Integer.parseInt(value.substring(8, 10).trim()), 
-	    							Integer.parseInt(value.substring(10, 12).trim()), 
-	    							Integer.parseInt(value.substring(12, 14).trim())
-	    							)
-	    					);
-	    			break;
-	    		}
-	    		case "engineRPM":{
-	    			tripData.setEngineRPM(Integer.parseInt(value));
-	    			break;
-	    		}
-	    		case "speed":{
-	    			tripData.setSpeed(Integer.parseInt(value));
-	    			break;
-	    		}
-	    		case "fuelLevel":{
-	    			tripData.setFuelLevel(Integer.parseInt(value));
-	    			break;
-	    		}
-	    		case "id":{
-	    			busId = value;
-	    			break;
-	    		}
-	    	} 
-	    	break;
-		    }
-		  }
 		}
 		
+		for (TripData tripData2 : tripDataList) {
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(tripData2);
+			em.getTransaction().commit();
+			em.close();
+		}
+		resp.getWriter().println("Success!");
 	}
 }
