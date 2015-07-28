@@ -3,26 +3,26 @@
 		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 							http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		version="2.5"
-		xmlns="http://java.sun.com/xml/ns/javaee">
-	<display-name>Logistics Web Application</display-name>
-	<servlet>
+		xmlns="http://java.sun.com/xml/ns/javaee" id="WebApp_1437938739118">
+	<display-name id="DisplayName_1437938739376">Logistics Web Application</display-name>
+	<servlet id="Servlet_1437938739384">
 		<servlet-name>JPARefScenarioServlet</servlet-name>
 		<servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>
-		<init-param>
+		<init-param id="ParamValue_1437938739388">
 			<param-name>javax.ws.rs.Application</param-name>
 			<param-value>org.apache.olingo.odata2.core.rest.app.ODataApplication</param-value>
 		</init-param>
-		<init-param>
+		<init-param id="ParamValue_1437938739390">
 			<param-name>org.apache.olingo.odata2.service.factory</param-name>
 			<param-value>sap.logistics.service.ODataLogistics</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<servlet-mapping>
+	<servlet-mapping id="ServletMapping_1437938739379">
 		<servlet-name>JPARefScenarioServlet</servlet-name>
 		<url-pattern>/LogisticsOData.svc/*</url-pattern>
 	</servlet-mapping>
-	<filter>
+	<filter id="Filter_1437938739395">
 		<filter-name>CORS</filter-name>
 		<filter-class>sap.logistics.service.CORSFilter</filter-class>
 	</filter>
@@ -30,20 +30,28 @@
 		<filter-name>CORS</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<servlet>
+	<servlet id="Servlet_1437938739393">
 		<servlet-name>InsertTripData</servlet-name>
 		<servlet-class>sap.logistics.servlet.InsertTripDataServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
+	<servlet-mapping id="ServletMapping_1437938739382">
 		<servlet-name>InsertTripData</servlet-name>
 		<url-pattern>/InsertTripData</url-pattern>
+	</servlet-mapping>
+		<servlet id="Servlet_1437939487641">
+		<servlet-name>insertData</servlet-name>
+		<servlet-class>sap.logistics.servlet.InserindoDataServleet</servlet-class>
+	</servlet>
+	<servlet-mapping id="ServletMapping_1437939526325">
+		<servlet-name>insertData</servlet-name>
+		<url-pattern>/insertData</url-pattern>
 	</servlet-mapping>
 
 	<!-- END: test-resources -->
 	<!-- BEGIN: DEV MODE -->
 	<!-- DEV MODE switched off by default and can be switched on during development -->
 	<!-- but has to be switched off for productive use on a Java server! -->
-	<context-param>
+	<context-param id="ParamValue_1437938739397">
 		<param-name>com.sap.ui5.resource.DEV_MODE</param-name>
 		<param-value>false</param-value>
 	</context-param>

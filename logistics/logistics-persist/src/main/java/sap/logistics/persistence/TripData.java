@@ -19,7 +19,7 @@ public class TripData implements Serializable{
 	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dateTime;
 	private long engineRPM;
 	private long speed;

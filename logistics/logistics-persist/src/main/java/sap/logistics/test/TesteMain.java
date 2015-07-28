@@ -69,7 +69,6 @@ public class TesteMain {
 			veh.setYear(numero);
 
 			tri.setArrivalTime(data);
-			tri.setDate(data);
 			tri.setDepartureTime(data);
 			tri.setDistance(numero);
 			tri.setDriver(drive);
