@@ -46,10 +46,10 @@ public class Route implements Serializable{
 	private String arrivalLocation;
 	private long distance;
 	
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar departureTime;
 	
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar arrivalTime;
 	
 	public String getDepertureLocation() {

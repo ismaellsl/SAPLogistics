@@ -38,12 +38,9 @@ public class Trip implements Serializable {
 	@OneToMany(mappedBy = "trip")
 	private List<TripData> tripDatas;
 
-	@Temporal(TemporalType.DATE)
-	private Calendar date;
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar departureTime;
-	@Temporal(TemporalType.TIME)
-
+	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar arrivalTime;
 	private int passengerNr;
 	private long distance;
@@ -88,12 +85,6 @@ public class Trip implements Serializable {
 	public void setRoute(Route route) {
 		this.route = route;
 	}
-	public Calendar getDate() {
-		return date;
-	}
-	public void setDate(Calendar date) {
-		this.date = date;
-	}
 	public Calendar getDepartureTime() {
 		return departureTime;
 	}
@@ -106,6 +97,7 @@ public class Trip implements Serializable {
 	public void setArrivalTime(Calendar arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
+
 	
 
 }

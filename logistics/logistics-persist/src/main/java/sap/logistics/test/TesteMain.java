@@ -13,6 +13,7 @@ import sap.logistics.persistence.Driver;
 import sap.logistics.persistence.Passenger;
 import sap.logistics.persistence.Route;
 import sap.logistics.persistence.Trip;
+import sap.logistics.persistence.TripData;
 import sap.logistics.persistence.Vehicle;
 
 public class TesteMain {
@@ -36,6 +37,7 @@ public class TesteMain {
 			Route rout = new Route();
 			Trip tri = new Trip();
 			Vehicle veh = new Vehicle();
+			TripData tridata = new TripData();
 
 			trips.add(tri);
 			passenger.add(pass);
@@ -69,13 +71,18 @@ public class TesteMain {
 			veh.setYear(numero);
 
 			tri.setArrivalTime(data);
-			tri.setDate(data);
 			tri.setDepartureTime(data);
 			tri.setDistance(numero);
 			tri.setDriver(drive);
 			tri.setPassengerNr(numero);
 			tri.setRoute(rout);
 			tri.setVehicle(veh);
+			
+			tridata.setDateTime(data);
+			tridata.setEngineRPM((long) Math.random()*101);
+			tridata.setFuelLevel((long) Math.random()*101);
+			tridata.setSpeed((long) Math.random()*101);
+			tridata.setTrip(tri);
 
 			entityManager.persist(drive);
 			entityManager.persist(rout);
