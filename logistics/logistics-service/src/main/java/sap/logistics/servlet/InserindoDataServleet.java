@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sap.logistics.persistence.Driver;
+import sap.logistics.persistence.Maintenance;
+import sap.logistics.persistence.MaintenanceReason;
+import sap.logistics.persistence.MaintenanceType;
 import sap.logistics.persistence.Passenger;
 import sap.logistics.persistence.Route;
 import sap.logistics.persistence.Trip;
@@ -97,6 +100,7 @@ public class InserindoDataServleet extends HttpServlet {
 			entityManager.persist(drive);
 			entityManager.persist(rout);
 			entityManager.persist(tri);
+			entityManager.persist(tridata);
 			entityManager.persist(veh);
 			entityManager.persist(pass);
 
@@ -166,6 +170,7 @@ public class InserindoDataServleet extends HttpServlet {
 			entityManager.persist(drive);
 			entityManager.persist(rout);
 			entityManager.persist(tri);
+			entityManager.persist(tridata);
 			entityManager.persist(veh);
 			entityManager.persist(pass);
 
@@ -240,6 +245,7 @@ public class InserindoDataServleet extends HttpServlet {
 			entityManager.persist(drive);
 			entityManager.persist(rout);
 			entityManager.persist(tri);
+			entityManager.persist(tridata);
 			entityManager.persist(veh);
 			entityManager.persist(pass);
 
@@ -311,6 +317,7 @@ public class InserindoDataServleet extends HttpServlet {
 			entityManager.persist(drive);
 			entityManager.persist(rout);
 			entityManager.persist(tri);
+			entityManager.persist(tridata);
 			entityManager.persist(veh);
 			entityManager.persist(pass);
 
@@ -362,7 +369,69 @@ public class InserindoDataServleet extends HttpServlet {
 			veh.setTrips(trips);
 			veh.setVehicleInscription("590" );
 			veh.setYear(numero);
+			
+			
+			ArrayList<Maintenance> maintenances = new ArrayList<Maintenance>();
+			Maintenance main = new Maintenance();
+			main.setDate(data);
+			main.setDescription("disco de freio gasto");
+			main.setType(MaintenanceType.Corretiva);
+			main.setReason(MaintenanceReason.Constatação);
+			maintenances.add(main);
+			
 
+			Maintenance main2 = new Maintenance();
+			main2.setDate(data);
+			main2.setDescription("Parabrisa rachado");
+			main2.setType(MaintenanceType.Corretiva);
+			main2.setReason(MaintenanceReason.Quebra);
+			maintenances.add(main2);
+			
+
+			Maintenance main3= new Maintenance();
+			main3.setDate(data);
+			main3.setDescription("Pneu furado");
+			main3.setType(MaintenanceType.Corretiva);
+			main3.setReason(MaintenanceReason.Quebra);
+			maintenances.add(main3);
+			
+			
+			Maintenance main4= new Maintenance();
+			main4.setDate(data);
+			main4.setDescription("Manutenção semestral");
+			main4.setType(MaintenanceType.Preventiva);
+			main4.setReason(MaintenanceReason.Previsto);
+			maintenances.add(main4);
+			
+			Maintenance main5= new Maintenance();
+			main5.setDate(data);
+			main5.setDescription("Manutenção Semestral");
+			main5.setType(MaintenanceType.Preventiva);
+			main5.setReason(MaintenanceReason.Previsto);
+			maintenances.add(main5);
+			
+			Maintenance main6= new Maintenance();
+			main6.setDate(data);
+			main6.setDescription("Manutenção Semestral");
+			main6.setType(MaintenanceType.Preventiva);
+			main6.setReason(MaintenanceReason.Previsto);
+			maintenances.add(main6);
+			
+			Maintenance main7= new Maintenance();
+			main7.setDate(data);
+			main7.setDescription("Manutenção Semestral");
+			main7.setType(MaintenanceType.Preventiva);
+			main7.setReason(MaintenanceReason.Previsto);
+			maintenances.add(main7);
+			
+			Maintenance main8= new Maintenance();
+			main8.setDate(data);
+			main8.setDescription("Borracha vedação desgastada");
+			main8.setType(MaintenanceType.Preventiva);
+			main8.setReason(MaintenanceReason.Extra);
+			maintenances.add(main8);
+			
+			
 			tri.setArrivalTime(dataChegada);
 			tri.setDepartureTime(data);
 			tri.setDistance(numero);
@@ -382,6 +451,7 @@ public class InserindoDataServleet extends HttpServlet {
 			entityManager.persist(drive);
 			entityManager.persist(rout);
 			entityManager.persist(tri);
+			entityManager.persist(tridata);
 			entityManager.persist(veh);
 			entityManager.persist(pass);
 
