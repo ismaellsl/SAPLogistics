@@ -13,12 +13,17 @@ public class Maintenance implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
+
 	private String type;
 	private String description;
 	
 	@Temporal(TemporalType.TIME)
 	private Calendar date;
-
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "vehicle_id")
+	private Vehicle vehicle;
+	
 	public String getType() {
 		return type;
 	}
@@ -47,4 +52,11 @@ public class Maintenance implements Serializable{
 		return id;
 	}
 	
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+	
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
 }

@@ -6,6 +6,9 @@ import java.util.List;
 import javax.persistence.*;	
 
 @Entity
+@NamedQueries ({
+	@NamedQuery(name="Vehicle.findOne", query="SELECT v FROM Vehicle v WHERE v.chassi = :v") 
+})
 public class Vehicle implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -14,7 +17,10 @@ public class Vehicle implements Serializable{
 	private int id;
 	
 	private String plate;
+	
+	@Column(unique = true)
 	private String chassi;
+	
 	private String fuelType;
 	private String fiscalNumber;
 	private int capacity;
@@ -24,6 +30,9 @@ public class Vehicle implements Serializable{
 	
 	@OneToMany(mappedBy = "vehicle")
 	private List<Trip> trips;
+	
+	@OneToMany(mappedBy = "vehicle")
+	private List<Maintenance> maintenances;
 	
 	public List<Trip> getTrips() {
 		return trips;
@@ -98,5 +107,13 @@ public class Vehicle implements Serializable{
 	}
 	public int getId() {
 		return id;
+	}
+
+	public List<Maintenance> getMaintenances() {
+		return maintenances;
+	}
+
+	public void setMaintenance(List<Maintenance> maintenances) {
+		this.maintenances = maintenances;
 	}
 }
