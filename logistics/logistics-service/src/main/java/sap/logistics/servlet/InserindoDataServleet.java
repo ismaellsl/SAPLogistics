@@ -16,13 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import sap.logistics.persistence.Driver;
 import sap.logistics.persistence.Maintenance;
-import sap.logistics.persistence.MaintenanceReason;
-import sap.logistics.persistence.MaintenanceType;
 import sap.logistics.persistence.Passenger;
 import sap.logistics.persistence.Route;
 import sap.logistics.persistence.Trip;
 import sap.logistics.persistence.TripData;
 import sap.logistics.persistence.Vehicle;
+import sap.logistics.persistence.types.MaintenanceReason;
+import sap.logistics.persistence.types.MaintenanceType;
 
 public class InserindoDataServleet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -72,7 +72,7 @@ public class InserindoDataServleet extends HttpServlet {
 			rout.setDepartureTime(data);
 
 			veh.setCapacity(45);
-			veh.setChassi("9WT2324232A33242" );
+			veh.setChassi("9WT2324232A33241" );
 			veh.setFiscalNumber("23243213" );
 			veh.setFuelType("Diesel" );
 			veh.setModel("Mercedes" );
@@ -361,7 +361,7 @@ public class InserindoDataServleet extends HttpServlet {
 			rout.setDepartureTime(data);
 
 			veh.setCapacity(15);
-			veh.setChassi("ZZ9879S1SD12345" );
+			veh.setChassi("ZZ9879S1SD12347" );
 			veh.setFiscalNumber("098767576745" );
 			veh.setFuelType("Gasoline" );
 			veh.setModel("Mercedes" );
@@ -377,6 +377,7 @@ public class InserindoDataServleet extends HttpServlet {
 			main.setDescription("disco de freio gasto");
 			main.setType(MaintenanceType.Corretiva);
 			main.setReason(MaintenanceReason.Constatação);
+			main.setVehicle(veh);
 			maintenances.add(main);
 			
 
@@ -385,6 +386,7 @@ public class InserindoDataServleet extends HttpServlet {
 			main2.setDescription("Parabrisa rachado");
 			main2.setType(MaintenanceType.Corretiva);
 			main2.setReason(MaintenanceReason.Quebra);
+			main2.setVehicle(veh);
 			maintenances.add(main2);
 			
 
@@ -393,6 +395,7 @@ public class InserindoDataServleet extends HttpServlet {
 			main3.setDescription("Pneu furado");
 			main3.setType(MaintenanceType.Corretiva);
 			main3.setReason(MaintenanceReason.Quebra);
+			main3.setVehicle(veh);
 			maintenances.add(main3);
 			
 			
@@ -401,6 +404,7 @@ public class InserindoDataServleet extends HttpServlet {
 			main4.setDescription("Manutenção semestral");
 			main4.setType(MaintenanceType.Preventiva);
 			main4.setReason(MaintenanceReason.Previsto);
+			main4.setVehicle(veh);
 			maintenances.add(main4);
 			
 			Maintenance main5= new Maintenance();
@@ -408,6 +412,7 @@ public class InserindoDataServleet extends HttpServlet {
 			main5.setDescription("Manutenção Semestral");
 			main5.setType(MaintenanceType.Preventiva);
 			main5.setReason(MaintenanceReason.Previsto);
+			main5.setVehicle(veh);
 			maintenances.add(main5);
 			
 			Maintenance main6= new Maintenance();
@@ -415,6 +420,7 @@ public class InserindoDataServleet extends HttpServlet {
 			main6.setDescription("Manutenção Semestral");
 			main6.setType(MaintenanceType.Preventiva);
 			main6.setReason(MaintenanceReason.Previsto);
+			main6.setVehicle(veh);
 			maintenances.add(main6);
 			
 			Maintenance main7= new Maintenance();
@@ -422,6 +428,7 @@ public class InserindoDataServleet extends HttpServlet {
 			main7.setDescription("Manutenção Semestral");
 			main7.setType(MaintenanceType.Preventiva);
 			main7.setReason(MaintenanceReason.Previsto);
+			main7.setVehicle(veh);
 			maintenances.add(main7);
 			
 			Maintenance main8= new Maintenance();
@@ -429,9 +436,11 @@ public class InserindoDataServleet extends HttpServlet {
 			main8.setDescription("Borracha vedação desgastada");
 			main8.setType(MaintenanceType.Preventiva);
 			main8.setReason(MaintenanceReason.Extra);
+			main8.setVehicle(veh);
 			maintenances.add(main8);
 			
 			
+			veh.setMaintenance(maintenances);
 			tri.setArrivalTime(dataChegada);
 			tri.setDepartureTime(data);
 			tri.setDistance(numero);
@@ -447,7 +456,14 @@ public class InserindoDataServleet extends HttpServlet {
 			tridata.setTrip(tri);
 			
 			entityManager.getTransaction().begin();
-			
+			entityManager.persist(main);
+			entityManager.persist(main2);
+			entityManager.persist(main3);
+			entityManager.persist(main4);
+			entityManager.persist(main5);
+			entityManager.persist(main6);
+			entityManager.persist(main7);
+			entityManager.persist(main8);
 			entityManager.persist(drive);
 			entityManager.persist(rout);
 			entityManager.persist(tri);
