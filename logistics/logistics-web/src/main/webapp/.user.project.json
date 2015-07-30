@@ -1,0 +1,34 @@
+{
+  "run": [
+    {
+      "filePath": "/InnoWek/index.html",
+      "previewMode": 0,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [],
+      "_metadata": {
+        "runnerId": "webapprunner",
+        "id": 6214116,
+        "displayName": "New Web Application 6"
+      }
+    },
+    {
+      "filePath": "/InnoWek/localIndex.html",
+      "previewMode": 0,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [],
+      "_metadata": {
+        "runnerId": "webapprunner",
+        "id": 2900941,
+        "displayName": "New Web Application 4"
+      }
+    }
+  ]
+}
