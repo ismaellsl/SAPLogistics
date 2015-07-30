@@ -23,7 +23,11 @@ public class Maintenance implements Serializable{
 	
 	@Temporal(TemporalType.TIME)
 	private Calendar date;
-
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "vehicle_id")
+	private Vehicle vehicle;
+	
 	public String getDescription() {
 		return description;
 	}
@@ -62,4 +66,11 @@ public class Maintenance implements Serializable{
 	
 	
 
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+	
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
 }

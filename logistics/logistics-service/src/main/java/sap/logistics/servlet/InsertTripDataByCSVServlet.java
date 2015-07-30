@@ -36,8 +36,8 @@ public class InsertTripDataByCSVServlet extends HttpServlet{
 		
 		if (list.isEmpty()){
 			driver = new Driver();
-		}else if(true){
-			
+		}else if(list.size() > 1){
+
 		}else{
 			
 		}

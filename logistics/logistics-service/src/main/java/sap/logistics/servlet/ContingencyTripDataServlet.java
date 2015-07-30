@@ -15,6 +15,7 @@ import javax.json.stream.JsonParserFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.json.stream.JsonParser.Event;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -158,19 +159,32 @@ public class ContingencyTripDataServlet extends HttpServlet {
 		vehicle.setModel("Sandeiro");
 		vehicle.setYear(2014);
 		
-		Driver driver = new Driver();
-		driver.setName("Rodrigo Buhler");
-		driver.setRegistration("653838949222");
+		EntityManager em = emf.createEntityManager();
+		Query query = em.createNamedQuery("Driver.findOne");
+		query.setParameter("r", "653838949222");
+		
+		List<Driver> list = query.getResultList();
+		Driver driver = null;
+		
+		if (list.isEmpty()){
+			driver = new Driver();
+			driver.setName("Rodrigo Buhler");
+			driver.setRegistration("653838949222");
+			driver.setTrips(tripList);
+		}else if(list.size() == 1){
+			driver = list.get(0);
+		}else{
+			resp.getWriter().println("Error! There are more than 1 entry in Driver for this registration number");
+		}
+		
 		trip.setArrivalTime(tripArrivalDate);
 		trip.setDistance(2000);
 		trip.setDriver(driver);
 		trip.setVehicle(vehicle);
 		tripList.add(trip);
 		vehicle.setTrips(tripList);
-		driver.setTrips(tripList);
-
 		
-		EntityManager em = emf.createEntityManager();
+
 		for (TripData tripData2 : tripDataList) {
   			Calendar date = new GregorianCalendar();
   			tripData2.setDateTime(date);
@@ -178,13 +192,14 @@ public class ContingencyTripDataServlet extends HttpServlet {
 			em.getTransaction().begin();
 			em.persist(tripData2);
 			em.getTransaction().commit();
+			
   			try {
-				Thread.sleep(1150);
+				Thread.sleep(0);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
 		Calendar departureDate = new GregorianCalendar();
 		trip.setDepartureTime(departureDate);
 		em.getTransaction().begin();
