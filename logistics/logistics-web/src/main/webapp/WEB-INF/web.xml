@@ -38,6 +38,14 @@
 		<servlet-name>InsertTripData</servlet-name>
 		<url-pattern>/InsertTripData</url-pattern>
 	</servlet-mapping>
+	<servlet id="Servlet_1437938777777">
+		<servlet-name>ContingencyTripData</servlet-name>
+		<servlet-class>sap.logistics.servlet.ContingencyTripDataServlet</servlet-class>
+	</servlet>
+	<servlet-mapping id="ServletMapping_1437938777777">
+		<servlet-name>ContingencyTripData</servlet-name>
+		<url-pattern>/ContingencyTripData</url-pattern>
+	</servlet-mapping>
 		<servlet id="Servlet_1437939487641">
 		<servlet-name>insertData</servlet-name>
 		<servlet-class>sap.logistics.servlet.InserindoDataServleet</servlet-class>

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,16 +23,16 @@ public class Trip implements Serializable {
 	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private int id;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "vehicle_id")
 	
 	private Vehicle vehicle;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "driver_id")
 	private Driver driver;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "route_id")
 	private Route route;
 	

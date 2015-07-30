@@ -2,6 +2,8 @@ package sap.logistics.persistence;
 
 import java.io.Serializable;
 import java.util.Calendar;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,40 +25,27 @@ public class TripData implements Serializable{
 	private Calendar dateTime;
 	
 	private long engineRPM;
-	private long xAxis;
-	private long yAxis;
-	private long zAxis;
+	private long x;
+	private long y;
+	private long z;
 	private long speed;
-	public long getxAxis() {
-		return xAxis;
-	}
-	public void setxAxis(long xAxis) {
-		this.xAxis = xAxis;
-	}
-	public long getyAxis() {
-		return yAxis;
-	}
-	public void setyAxis(long yAxis) {
-		this.yAxis = yAxis;
-	}
-	public long getzAxis() {
-		return zAxis;
-	}
-	public void setzAxis(long zAxis) {
-		this.zAxis = zAxis;
-	}
+	private long temperature;
+	private long engineLoad;
+	
 	private long fuelLevel;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "trip_id")
 	private Trip trip;
 	
 	public int getId() {
 		return id;
 	}
+	
 	public Trip getTrip() {
 		return trip;
 	}
+	
 	public void setTrip(Trip trip) {
 		this.trip = trip;
 	}
@@ -64,18 +53,23 @@ public class TripData implements Serializable{
 	public long getEngineRPM() {
 		return engineRPM;
 	}
+	
 	public void setEngineRPM(long engineRPM) {
 		this.engineRPM = engineRPM;
 	}
+	
 	public long getSpeed() {
 		return speed;
 	}
+	
 	public void setSpeed(long speed) {
 		this.speed = speed;
 	}
+	
 	public long getFuelLevel() {
 		return fuelLevel;
 	}
+	
 	public void setFuelLevel(long fuelLevel) {
 		this.fuelLevel = fuelLevel;
 	}
@@ -83,13 +77,49 @@ public class TripData implements Serializable{
 	public Calendar getDateTime() {
 		return dateTime;
 	}
+	
 	public void setDateTime(Calendar dateTime) {
 		this.dateTime = dateTime;
 	}
-	@Override
-	public String toString() {
-		return "TripData [id=" + id + ", dateTime=" + dateTime + ", engineRPM=" + engineRPM + ", xAxis=" + xAxis
-				+ ", yAxis=" + yAxis + ", zAxis=" + zAxis + ", speed=" + speed + ", fuelLevel=" + fuelLevel + ", trip="
-				+ trip + "]";
+
+	public long getX() {
+		return x;
 	}
+
+	public void setX(long x) {
+		this.x = x;
+	}
+
+	public long getY() {
+		return y;
+	}
+
+	public void setY(long y) {
+		this.y = y;
+	}
+
+	public long getZ() {
+		return z;
+	}
+
+	public void setZ(long z) {
+		this.z = z;
+	}
+	
+	public long getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(long temperature) {
+		this.temperature = temperature;
+	}
+
+	public long getEngineLoad() {
+		return engineLoad;
+	}
+
+	public void setEngineLoad(long engineLoad) {
+		this.engineLoad = engineLoad;
+	}
+
 }

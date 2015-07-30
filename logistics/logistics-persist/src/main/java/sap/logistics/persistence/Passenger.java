@@ -21,7 +21,7 @@ public class Passenger implements Serializable{
 	private long mobileNumber;
 	private String email;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "route_id")
 	private Route route;
 	

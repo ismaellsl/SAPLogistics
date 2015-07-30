@@ -386,5 +386,7 @@ public class InserindoDataServleet extends HttpServlet {
 			entityManager.persist(pass);
 
 			entityManager.getTransaction().commit();
+			
+			response.getWriter().println("Maven Funcionando 100%!");
 	}
 }

@@ -6,6 +6,9 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries ({
+	@NamedQuery(name="Driver.findOne", query="SELECT d FROM Driver d WHERE d.registration = :r") 
+})
 public class Driver implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -14,7 +17,9 @@ public class Driver implements Serializable{
 	private int id;
 	
 	private String name;
+	@Column(unique = true)
 	private String registration;
+	
 	private String picture;
 	
 	@OneToMany(mappedBy = "driver")

@@ -21,9 +21,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sap.logistics.persistence.TripData;
+import sap.logistics.persistence.*;
 
-public class InsertTripDataServlet extends HttpServlet {
+
+
+public class ContingencyTripDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("logistics");
 
@@ -48,6 +50,8 @@ public class InsertTripDataServlet extends HttpServlet {
 		List<TripData> tripDataList = new ArrayList<>();
 		String busId = "";
 		int counter = 0;
+		Calendar tripArrivalDate = new GregorianCalendar();
+		
 		while (parser.hasNext()) {
 			try{
 			  Event event = parser.next();
@@ -58,9 +62,11 @@ public class InsertTripDataServlet extends HttpServlet {
 				    }
 				  	case END_OBJECT: {
 				  		counter--;
-				  		if(counter == 0){
+				  		if(counter == 0){ 
+				
 				  			tripDataList.add(tripData);
 				  			tripData = new TripData();
+
 				  		}
 				  		break;
 				    }
@@ -71,12 +77,6 @@ public class InsertTripDataServlet extends HttpServlet {
 				    case VALUE_STRING: {
 				    	String value = parser.getString(); 
 				    	switch (stack.pop()){
-				    		case "timeStamp":{
-				    			Calendar calendar = new GregorianCalendar();
-				    			calendar.setTimeInMillis(Long.parseLong(value));
-				    			tripData.setDateTime(calendar);
-				    			break;
-				    		}
 				    		case "engineRPM":{
 				    			tripData.setEngineRPM(Long.parseLong(value));
 				    			break;
@@ -115,12 +115,6 @@ public class InsertTripDataServlet extends HttpServlet {
 				    			busId = value;
 				    			break;
 				    		}
-				    		case "timeStamp":{
-				    			Calendar calendar = new GregorianCalendar();
-				    			calendar.setTimeInMillis(Long.parseLong(value));
-				    			tripData.setDateTime(calendar);
-				    			break;
-				    		}
 				    		case "engineRPM":{
 				    			tripData.setEngineRPM(Long.parseLong(value));
 				    			break;
@@ -154,14 +148,50 @@ public class InsertTripDataServlet extends HttpServlet {
 			}
 
 		}
+		List<Trip> tripList = new ArrayList();
+		Trip trip = new Trip();
+		Vehicle vehicle = new Vehicle();
+		vehicle.setCapacity(5);
+		vehicle.setChassi("ABC-213435464353");
+		vehicle.setFuelType("Gasoline");
+		vehicle.setPlate("IHC-8657");
+		vehicle.setModel("Sandeiro");
+		vehicle.setYear(2014);
 		
+		Driver driver = new Driver();
+		driver.setName("Rodrigo Buhler");
+		driver.setRegistration("653838949222");
+		trip.setArrivalTime(tripArrivalDate);
+		trip.setDistance(2000);
+		trip.setDriver(driver);
+		trip.setVehicle(vehicle);
+		tripList.add(trip);
+		vehicle.setTrips(tripList);
+		driver.setTrips(tripList);
+
+		
+		EntityManager em = emf.createEntityManager();
 		for (TripData tripData2 : tripDataList) {
-			EntityManager em = emf.createEntityManager();
+  			Calendar date = new GregorianCalendar();
+  			tripData2.setDateTime(date);
+			tripData2.setTrip(trip);
 			em.getTransaction().begin();
 			em.persist(tripData2);
 			em.getTransaction().commit();
-			em.close();
+  			try {
+				Thread.sleep(1150);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		resp.getWriter().println("Success!");
+		Calendar departureDate = new GregorianCalendar();
+		trip.setDepartureTime(departureDate);
+		em.getTransaction().begin();
+		em.persist(trip);
+		em.persist(vehicle);
+		em.persist(driver);
+		em.getTransaction().commit();
+		em.close();
 	}
 }
