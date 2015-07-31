@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
-		<title>Logistics Cockpit</title>
-		<script src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"
-				id="sap-ui-bootstrap"
-				data-sap-ui-libs="sap.m"
-				data-sap-ui-theme="sap_bluecrystal">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+<title>Logistics Cockpit</title>
+<script
+	src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"
+	id="sap-ui-bootstrap" data-sap-ui-libs="sap.m"
+	data-sap-ui-theme="sap_bluecrystal">
 		</script>
-		<!-- only load the mobile "sap.m" and the "sap_bluecrystal" theme -->
+<!-- only load the mobile "sap.m" and the "sap_bluecrystal" theme -->
 
-	<!-- 	<script>
+<!-- 	<script>
 				sap.ui.localResources("flightweb");
 				var app = new sap.m.App({initialPage:"idindex1"});
 				var page = sap.ui.view({id:"idindex1", viewName:"flightweb.index", type:sap.ui.core.mvc.ViewType.XML});
@@ -20,8 +20,8 @@
 				app.addPage(pageAdd);
 				app.placeAt("content");
 		</script>-->
-		
-			<script type="text/javascript">  
+
+<script type="text/javascript">  
             //1. Create a JSON model (oModel).
             //
             var jsonModel = [           
@@ -162,11 +162,11 @@
               
               //SPECIFIC code for this Tree
               //just updates a TextView with the ids we have found. 
-              if (modelId == "NFeMonitor"){
-            	  location.href = "monitor.html";			
+              if (modelId == "Drivers"){
+            	  location.href = "drivers.html";			
               }
-              else if (modelId == "ChartNFes"){
-            	  location.href = "nfechart.html"
+              else if (modelId == "Vehicles"){
+            	  location.href = "vehicle.html"
               }
               else if (modelId == "RfidPainel"){
             	  location.href = "RFIDMonitor.html"
@@ -207,8 +207,8 @@
     		}).placeAt("content_cockpit");
        </script>
 
-	</head>
-	<body class="sapUiBody" role="application">
-		<div id="content_cockpit"></div>
-	</body>
+</head>
+<body class="sapUiBody" role="application">
+	<div id="content_cockpit"></div>
+</body>
 </html>
