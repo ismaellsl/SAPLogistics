@@ -1,0 +1,217 @@
+<core:View controllerName="nfeapp.WebContent.view.Detail"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"  xmlns:commons="sap.ui.commons">
+	<Page title="{i18n>DetailTitle}" class="sapUiFioriObjectPage"
+		showNavButton="{device>/isPhone}" navButtonPress="handleNavButtonPress">
+		<HBox>
+			<ObjectHeader title="Trip Details" number="">
+				<attributes>
+					<ObjectAttribute text="{FORM}" />
+					<ObjectAttribute text="{REGIO}" />
+				</attributes>
+				<firstStatus>
+					<ObjectStatus
+						text="{
+						path: 'status',
+						formatter: 'nfeapp.WebContent.util.Formatter.statusText'
+					}"
+						state="{
+						path: 'status',
+						formatter: 'nfeapp.WebContent.util.Formatter.statusState'
+					}" />
+				</firstStatus>
+			</ObjectHeader>
+		</HBox>
+
+
+		<IconTabBar expanded="{device>/isNoPhone}">
+			<!--  <items>
+				<IconTabFilter icon="sap-icon://supplier">
+					<form:SimpleForm id="SupplierForm" minWidth="1024">
+						<core:Title text="Address" />
+						<Label text="Name" />
+						<Text text="{NAME1}" />
+						<Label text="CNPJ" />
+						<Text text="{CGC}" />
+						<Label text="City" />
+						<Text text="{STRAS}" />
+						<Label text="Zip-Code" />
+						<Text text="{PSTLZ}" />
+						<Label text="Telephone" />
+						<Text text="{TELF1}" />
+
+					</form:SimpleForm>
+				</IconTabFilter>
+			</items>-->
+			<items>
+				<IconTabFilter icon="sap-icon://area-chart"
+				
+					iconColor="Negative">
+					<form:SimpleForm id="TripDataForm" minWidth="1024">
+						<core:Title text="Trip Data" />
+						<Table headerText="" items="{TripDataDetails}">
+							<columns>
+								<Column>
+									<header>
+										<Label text="Date/Time" />
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Engine Load" />
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Engine RPM" />
+									</header>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true"
+									hAlign="Center">
+									<header>
+										<Label text="Fuel Level" />
+									</header>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true"
+									hAlign="Center">
+									<header>
+										<Label text="Speed" />
+									</header>
+								</Column>
+								<Column hAlign="Right">
+									<header>
+										<Label text="Temperature" />
+									</header>
+								</Column>
+							</columns>
+							<ColumnListItem>
+								<cells>
+									<ObjectIdentifier title="{DateTime}" />
+									<ObjectIdentifier title="{EngineLoad}" />
+									<ObjectIdentifier title="{EngineRPM}" />
+									<Text text="{FuelLevel}" />
+
+									<ObjectIdentifier title="{Speed}" />
+									<ObjectIdentifier title="{Temperature}" />
+								</cells>
+							</ColumnListItem>
+						</Table>
+					</form:SimpleForm>
+				</IconTabFilter>
+			</items>
+
+			<items>
+				<IconTabFilter icon="sap-icon://shipping-status"
+					iconColor="Negative">
+					
+					<form:SimpleForm id="VehicleDetails" minWidth="1024">
+						<core:Title text="Vehicle Details" />
+						<Label text="Model" />
+						<Text text="Sandero" />
+						<Label text="Plate" />
+						<Text text="ITI-2321" />
+						<Label text="Fuel Type" />
+						<Text text="Gasoline" />
+						<Label text="Vehicle Inscription" />
+						<Text text="3125685" />
+						<Label text="Year" />
+						<Text text="2013" />
+						<Label text="Capacity" />
+						<Text text="5" />
+						<Label text="Chassi" />
+						<Text text="12627365755" />
+					</form:SimpleForm>
+				</IconTabFilter>
+			</items>
+			<items>
+				<IconTabFilter icon="sap-icon://supplier"
+					iconColor="Negative">
+					
+					<form:SimpleForm id="DriverDetails" minWidth="1024">
+						<core:Title text="Driver Details" />
+						<Label text="ID" />
+						<Text text="10" />
+						<Label text="Name" />
+						<Text text="Pedro Alvaro" />
+						<Label text="Registration" />
+						<Text text="6235442" />
+						<Label text="Picture" />
+						<Text text="" />
+					</form:SimpleForm>
+				</IconTabFilter>
+			</items>
+			<items>
+				<IconTabFilter icon="sap-icon://map-2"
+					iconColor="Negative">
+					
+					<form:SimpleForm id="RouteDetails" minWidth="1024">
+						<core:Title text="Route Details" />
+						<Label text="Arrival Location" />
+						<Text text="SAP" />
+						<Label text="Arrival Time" />
+						<Text text="2015-07-31 09:00:00" />
+						<Label text="Departure Time" />
+						<Text text="2015-07-31 07:00:00" />
+						<Label text="Departure Location" />
+						<Text text="Av. Assis Brasil" />
+						<Label text="Distance" />
+						<Text text="80 Km" />
+					</form:SimpleForm>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+		
+		<!-- <Table headerText="{i18n>LineItemTableHeader}" items="{items}">
+			<columns>
+				<Column>
+					<header>
+						<Label text="Item" />
+					</header>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+					<header>
+						<Label text="Product" />
+					</header>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+					<header>
+						<Label text="CFOP" />
+					</header>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+					<header>
+						<Label text="Quantity" />
+					</header>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+					<header>
+						<Label text="Unit" />
+					</header>
+				</Column>
+				<Column hAlign="Right">
+					<header>
+						<Label text="Net. Price" />
+					</header>
+				</Column>
+			</columns>
+			<ColumnListItem>
+				<cells>
+					<ObjectIdentifier title="{ITMNUM}" />
+					<ObjectIdentifier title="{MAKTX}" />
+					<Text text="{CFOP}" />
+
+					<ObjectIdentifier title="{MENGE}" />
+					<ObjectIdentifier title="{MEINS}" />
+					<ObjectNumber number="{NETPR}" numberUnit="{currency}" />
+				</cells>
+			</ColumnListItem>
+		</Table> -->
+		<footer>
+			<Bar>
+				<contentRight>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+
+</core:View>

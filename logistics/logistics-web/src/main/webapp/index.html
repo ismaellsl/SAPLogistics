@@ -34,12 +34,21 @@
 	        		//numberUnit: "NF-e(s)",
 	        		infoState: sap.ui.core.ValueState.Error},
 	        		
-	       		{	id : "Consumption",
-	               	title : "Vehicle Consumption",
-	               	info: "Fuel consumption by car",
-	               	icon:"mileage",
-	               	activeIcon:"mileage",
+	       		{	id : "TripMonitor",
+	               	title : "Trip Monitor",
+	               	//info: "",
+	               	icon:"feed",
+	               	activeIcon:"feed",
 	               	numberUnit: ""},
+	               	
+	       		{	id : "DistanceByRoute",
+	               	title : "Routes Chart",
+	               	info: "Distance by route",
+	               	icon:"pie-chart",
+	               	activeIcon:"pie-chart",
+	               	numberUnit: ""},
+	               	
+	               	
                	/* {	id : "DANFE",
                    	title : "DANFE",
                    	info: "Print DANFE",
@@ -165,11 +174,19 @@
               if (modelId == "Drivers"){
             	  location.href = "drivers.html";			
               }
+
               else if (modelId == "Vehicles"){
             	  location.href = "vehicle.html"
+
+              else if (modelId == "TripMonitor"){
+            	  location.href = "monitor.html"
+
               }
               else if (modelId == "RfidPainel"){
             	  location.href = "RFIDMonitor.html"
+              }
+              else if (modelId == "DistanceByRoute"){
+            	  location.href = "routesChart.html"
               }
               else{
             	  //alert("onTileNodeClicked ModelId:"+modelId + " \nsapui5 component id:"+selectedId);
