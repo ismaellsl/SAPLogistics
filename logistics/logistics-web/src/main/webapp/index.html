@@ -40,6 +40,15 @@
 	               	icon:"mileage",
 	               	activeIcon:"mileage",
 	               	numberUnit: ""},
+	               	
+	       		{	id : "DistanceByRoute",
+	               	title : "Routes Chart",
+	               	info: "Distance by route",
+	               	icon:"business-objects-experience",
+	               	activeIcon:"business-objects-experience",
+	               	numberUnit: ""},
+	               	
+	               	
                	/* {	id : "DANFE",
                    	title : "DANFE",
                    	info: "Print DANFE",
@@ -170,6 +179,9 @@
               }
               else if (modelId == "RfidPainel"){
             	  location.href = "RFIDMonitor.html"
+              }
+              else if (modelId == "DistanceByRoute"){
+            	  location.href = "routesChart.html"
               }
               else{
             	  //alert("onTileNodeClicked ModelId:"+modelId + " \nsapui5 component id:"+selectedId);
