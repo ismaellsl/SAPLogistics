@@ -36,7 +36,7 @@ public class Trip implements Serializable {
 	@JoinColumn(name = "route_id")
 	private Route route;
 	
-	@OneToMany(mappedBy = "trip")
+	@OneToMany(mappedBy = "trip", cascade = CascadeType.PERSIST)
 	private List<TripData> tripDatas;
 
 	@Temporal(TemporalType.TIMESTAMP)
