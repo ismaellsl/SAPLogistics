@@ -34,18 +34,18 @@
 	        		//numberUnit: "NF-e(s)",
 	        		infoState: sap.ui.core.ValueState.Error},
 	        		
-	       		{	id : "Consumption",
-	               	title : "Vehicle Consumption",
-	               	info: "Fuel consumption by car",
-	               	icon:"mileage",
-	               	activeIcon:"mileage",
+	       		{	id : "TripMonitor",
+	               	title : "Trip Monitor",
+	               	//info: "",
+	               	icon:"feed",
+	               	activeIcon:"feed",
 	               	numberUnit: ""},
 	               	
 	       		{	id : "DistanceByRoute",
 	               	title : "Routes Chart",
 	               	info: "Distance by route",
-	               	icon:"business-objects-experience",
-	               	activeIcon:"business-objects-experience",
+	               	icon:"pie-chart",
+	               	activeIcon:"pie-chart",
 	               	numberUnit: ""},
 	               	
 	               	
@@ -174,8 +174,8 @@
               if (modelId == "NFeMonitor"){
             	  location.href = "monitor.html";			
               }
-              else if (modelId == "ChartNFes"){
-            	  location.href = "nfechart.html"
+              else if (modelId == "TripMonitor"){
+            	  location.href = "monitor.html"
               }
               else if (modelId == "RfidPainel"){
             	  location.href = "RFIDMonitor.html"

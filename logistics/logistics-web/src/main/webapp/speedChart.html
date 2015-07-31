@@ -1,0 +1,54 @@
+<html>
+
+<head>
+<meta name="description" content="Viz Pie Chart with OData" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<title>Pie Char with OData service</title>
+<link rel="stylesheet" type="text/css" href="">
+
+<script id="sap-ui-bootstrap"
+	src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"
+	type="text/javascript" data-sap-ui-libs="sap.ui.core,sap.viz"
+	data-sap-ui-theme="sap_goldreflection">
+	
+</script>
+<script>
+	var sURI = 'LogisticsOData.svc/';
+	var oModel = new sap.ui.model.odata.ODataModel(sURI, true);
+
+	var oDataset = new sap.viz.ui5.data.FlattenedDataset({
+		dimensions : [ {
+			axis : 1,
+			name : 'Departure Location',
+			value : '{DepertureLocation}'
+		} ],
+		measures : [ {
+			name : 'Distance',
+			value : "{Distance}"
+		} ],
+		data : {
+			path : "/Routes"
+		}
+	});
+
+	oChart = new sap.viz.ui5.Pie({
+		width : "100%",
+		height : "100%",
+		title : {
+			visible : true,
+			text : 'Distance by route'
+		},
+		dataset : oDataset
+	});
+	oChart.setModel(oModel)
+	oChart.placeAt("content")
+</script>
+
+</head>
+
+<body class="sapUiBody" role="application">
+	<div id="content"></div>
+</body>
+
+</html>
