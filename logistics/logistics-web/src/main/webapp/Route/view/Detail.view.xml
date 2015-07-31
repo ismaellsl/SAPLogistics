@@ -1,10 +1,10 @@
-<mvc:View controllerName="Vehicle.view.Detail" xmlns="sap.m"
+<mvc:View controllerName="Route.view.Detail" xmlns="sap.m"
 	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form">
 	<Page id="detailPage" navButtonPress="onNavBack" title="{i18n>detailTitle}"
 		showNavButton="{device>/isPhone}">
 		<content>
-			<ObjectHeader id="detailHeader" title="{VehicleInscription}"
+			<ObjectHeader id="detailHeader" title="{RouteInscription}"
 				number="{Id}" numberUnit="" introActive="false" titleActive="false"
 				iconActive="false">
 				<attributes id="detailAttributes">
@@ -76,7 +76,7 @@
 			<OverflowToolbar id="otbFooter">
 				<ToolbarSpacer />
 				<OverflowToolbarButton text="Delete"
-					icon="sap-icon://delete" press="deleteVehicle" />
+					icon="sap-icon://delete" press="deleteRoute" />
 				<OverflowToolbarButton text="Edit" icon="sap-icon://edit" />
 				<OverflowToolbarButton text="Add" icon="sap-icon://add" />
 			</OverflowToolbar>

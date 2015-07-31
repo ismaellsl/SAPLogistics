@@ -8,6 +8,7 @@ import org.apache.olingo.odata2.api.ODataDebugCallback;
 import org.apache.olingo.odata2.jpa.processor.api.ODataJPAContext;
 import org.apache.olingo.odata2.jpa.processor.api.ODataJPAServiceFactory;
 import org.apache.olingo.odata2.jpa.processor.api.exception.ODataJPARuntimeException;
+import org.apache.olingo.odata2.jpa.processor.api.model.JPAEdmExtension;
 
 public class ODataLogistics extends ODataJPAServiceFactory {
 	private static final String PUNIT_NAME = "logistics";
@@ -18,6 +19,7 @@ public class ODataLogistics extends ODataJPAServiceFactory {
 		ODataJPAContext oDataJPAContext = this.getODataJPAContext();
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PUNIT_NAME);
 		oDataJPAContext.setEntityManagerFactory(emf);
+		//oDataJPAContext.setJPAEdmExtension((JPAEdmExtension) new InnoWeekProcessorExtension());
 		oDataJPAContext.setPersistenceUnitName(PUNIT_NAME);
 		return oDataJPAContext;
 
