@@ -107,19 +107,19 @@
 					<form:SimpleForm id="VehicleDetails" minWidth="1024">
 						<core:Title text="Vehicle Details" />
 						<Label text="Model" />
-						<Text text="Sandero" />
+						<Text text="{VehicleDetails/Model}" />
 						<Label text="Plate" />
-						<Text text="ITI-2321" />
+						<Text text="{VehicleDetails/Plate}" />
 						<Label text="Fuel Type" />
-						<Text text="Gasoline" />
+						<Text text="{VehicleDetails/FuelType}" />
 						<Label text="Vehicle Inscription" />
-						<Text text="3125685" />
+						<Text text="{VehicleDetails/VehicleInscription}" />
 						<Label text="Year" />
-						<Text text="2013" />
+						<Text text="{VehicleDetails/Year}" />
 						<Label text="Capacity" />
-						<Text text="5" />
+						<Text text="{VehicleDetails/Capacity}" />
 						<Label text="Chassi" />
-						<Text text="12627365755" />
+						<Text text="{VehicleDetails/Chassi}" />
 					</form:SimpleForm>
 				</IconTabFilter>
 			</items>
@@ -130,11 +130,11 @@
 					<form:SimpleForm id="DriverDetails" minWidth="1024">
 						<core:Title text="Driver Details" />
 						<Label text="ID" />
-						<Text text="10" />
+						<Text text="{DriverDetails/Id}" />
 						<Label text="Name" />
-						<Text text="Pedro Alvaro" />
+						<Text text="{DriverDetails/Name}" />
 						<Label text="Registration" />
-						<Text text="6235442" />
+						<Text text="{DriverDetails/Registration}" />
 						<Label text="Picture" />
 						<Text text="" />
 					</form:SimpleForm>
@@ -147,15 +147,15 @@
 					<form:SimpleForm id="RouteDetails" minWidth="1024">
 						<core:Title text="Route Details" />
 						<Label text="Arrival Location" />
-						<Text text="SAP" />
+						<Text text="{RouteDetails/ArrivalLocation}" />
 						<Label text="Arrival Time" />
-						<Text text="2015-07-31 09:00:00" />
+						<Text text="{RouteDetails/ArrivalTime}" />
 						<Label text="Departure Time" />
-						<Text text="2015-07-31 07:00:00" />
+						<Text text="{RouteDetails/DepartureTime}" />
 						<Label text="Departure Location" />
-						<Text text="Av. Assis Brasil" />
+						<Text text="{RouteDetails/DepertureLocation}" />
 						<Label text="Distance" />
-						<Text text="80 Km" />
+						<Text text="{RouteDetails/Distance}" />
 					</form:SimpleForm>
 				</IconTabFilter>
 			</items>
