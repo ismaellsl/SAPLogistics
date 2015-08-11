@@ -10,12 +10,12 @@
 			</Bar>
 		</subHeader>
 		<List id="list" mode="{device>/listMode}" select="handleListSelect"
-			items="{/Trips}">
+			items="{/Trips?$expand=VehicleDetails,DriverDetails,RouteDetails}">
 			<ObjectListItem type="{device>/listItemType}" press="handleListItemPress"
 				title="{DepartureTime}" number="{Passengernr}"
 				icon="sap-icon://bus-public-transport">
 				<attributes>
-					<ObjectAttribute text="{DriverDetails/Name}" />
+					<ObjectAttribute text="{VehicleDetails/Plate}" />
 				</attributes>
 				<firstStatus>
 					<ObjectStatus
