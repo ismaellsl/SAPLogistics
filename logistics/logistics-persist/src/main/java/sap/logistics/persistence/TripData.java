@@ -31,8 +31,9 @@ public class TripData implements Serializable{
 	private long speed;
 	private long temperature;
 	private long engineLoad;
-	
 	private long fuelLevel;
+	private int latitude;
+	private int longitude;
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "trip_id")
@@ -120,6 +121,22 @@ public class TripData implements Serializable{
 
 	public void setEngineLoad(long engineLoad) {
 		this.engineLoad = engineLoad;
+	}
+
+	public int getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(int latitude) {
+		this.latitude = latitude;
+	}
+
+	public int getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(int longitude) {
+		this.longitude = longitude;
 	}
 
 }

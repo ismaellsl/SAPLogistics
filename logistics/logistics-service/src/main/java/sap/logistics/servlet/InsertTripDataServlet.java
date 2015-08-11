@@ -43,12 +43,9 @@ public class InsertTripDataServlet extends HttpServlet {
 		String line;
 		String text = "";
 		while ((line = br.readLine()) != null) {
-			if (line.contains("WebKitFormBoundary"))
-				line = "";
 			text = text.concat("\n" + line);
 		}
-
-		text = text.trim();
+		text = text.substring(text.indexOf("["), (text.lastIndexOf("]"))+ 1 ).trim();
 		JsonParserFactory factory = Json.createParserFactory(null);
 		JsonParser parser = factory.createParser(new StringReader(text));
 		Stack<String> stack = new Stack<>();
@@ -114,6 +111,16 @@ public class InsertTripDataServlet extends HttpServlet {
 						tripData.setZ(Long.parseLong(value));
 						break;
 					}
+					case "temp": {
+						tripData.setTemperature(Long.parseLong(value));
+						break;
+					}
+					case "latitude": {
+						tripData.setLatitude(Integer.parseInt(value));
+					}
+					case "longitude": {
+						tripData.setLongitude(Integer.parseInt(value));
+					}
 					}
 					break;
 				}
@@ -153,6 +160,16 @@ public class InsertTripDataServlet extends HttpServlet {
 					case "zAxis": {
 						tripData.setZ(Long.parseLong(value));
 						break;
+					}
+					case "temp": {
+						tripData.setTemperature(Long.parseLong(value));
+						break;
+					}
+					case "latitude": {
+						tripData.setLatitude(Integer.parseInt(value));
+					}
+					case "longitude": {
+						tripData.setLongitude(Integer.parseInt(value));
 					}
 					}
 					break;
