@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Stack;
 
 import javax.json.Json;
+import javax.json.JsonException;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParserFactory;
 import javax.persistence.EntityManager;
@@ -26,13 +27,16 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.lf5.Log4JLogRecord;
 
 import sap.logistics.persistence.Driver;
+import sap.logistics.persistence.Route;
 import sap.logistics.persistence.Trip;
 import sap.logistics.persistence.TripData;
+import sap.logistics.persistence.TripDefault;
 import sap.logistics.persistence.Vehicle;
 
 public class InsertTripDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("logistics");
+	private static String obdId;
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,14 +49,135 @@ public class InsertTripDataServlet extends HttpServlet {
 		while ((line = br.readLine()) != null) {
 			text = text.concat("\n" + line);
 		}
-		text = text.substring(text.indexOf("["), (text.lastIndexOf("]"))+ 1 ).trim();
+		try {
+			text = text.substring(text.indexOf("["), (text.lastIndexOf("]"))+ 1 ).trim();			
+		} catch (StringIndexOutOfBoundsException e) {
+			resp.getWriter().println(text);
+			e.printStackTrace();
+		}
+		
 		JsonParserFactory factory = Json.createParserFactory(null);
 		JsonParser parser = factory.createParser(new StringReader(text));
 		Stack<String> stack = new Stack<>();
 		TripData tripData = new TripData();
-		List<TripData> tripDataList = new ArrayList<>();
-		String busId = "";
+		List<TripData> tripDataList = null;
+		try{
+			tripDataList = this.jsonParse(parser);
+			if(tripDataList.isEmpty()){
+				throw new JsonException("JSON is empty!");
+			}
+		}catch(JsonException e){
+			e.printStackTrace();
+		}
+		
+		List<Trip> tripList = new ArrayList();
+		Trip trip = new Trip();
+		
+
+		EntityManager em = emf.createEntityManager();
+		Query query = em.createNamedQuery("Driver.findOne");
+		//query.setParameter("r", "653838949222");
+		//List<Driver> list = query.getResultList();
+		
+		query = em.createNamedQuery("Vehicle.findByOBD");
+		query.setParameter("v", obdId);
+		Vehicle vehicle = (Vehicle) query.getResultList().get(0);
+		
+		Driver driver = vehicle.getDriver();
+		Route route = null;
+		
+		trip.setDriver(driver);
+		
+		tripList = driver.getTrips();
+		tripList.add(trip);
+		
+		driver.setTrips(tripList);
+		trip.setVehicle(vehicle);
+		trip.setTripDatas(tripDataList);
+		tripList.add(trip);
+		vehicle.setTrips(tripList);
+		
+		//find a route
+		List<Route> routes = vehicle.getRoutes();
+		if(routes.isEmpty())
+			throw new RuntimeException("Routes not found for vehicle with the informed OBD id");
+		else if(routes.size() == 1){
+			route = routes.get(0);
+		}else{
+			
+			Calendar routeCalendar;
+			for (Route route2 : routes) {
+				
+				if(route2.getDepartureTime() >= Integer.parseInt((tripDataList.get(0).getDateTime().get(Calendar.HOUR_OF_DAY)) + "" +
+						tripDataList.get(0).getDateTime().get(Calendar.MINUTE)) && 
+						route2.getArrivalTime() <= Integer.parseInt((tripDataList.get(0).getDateTime().get(Calendar.HOUR_OF_DAY)) + "" +
+								tripDataList.get(0).getDateTime().get(Calendar.MINUTE))){
+					route = route2;
+					break;
+				}
+			}
+			if(route == null){
+				throw new RuntimeException("Routes not found for vehicle with the informed OBD id");
+			}
+		}
+			
+		trip.setRoute(route);
+		
+		
+		int countTrip = 0;
+		double beginDistance = 0;
+		double endDistance = 0;
+		
+		for (TripData tripData2 : tripDataList) {
+			countTrip++;
+		
+			em.getTransaction().begin();
+			if(countTrip == 1){
+				trip.setArrivalTime(tripData2.getDateTime());
+				beginDistance = tripData2.getDistance();
+			}else if(countTrip == tripDataList.size()){				
+				trip.setDepartureTime(tripData2.getDateTime());
+				endDistance = tripData2.getDistance();
+			}
+			tripData2.setTrip(trip);
+			
+			em.persist(tripData2);
+			em.getTransaction().commit();
+		}
+		
+		if(endDistance == 0)
+			trip.setDistance(beginDistance);
+		else
+			trip.setDistance(endDistance - beginDistance);
+		
+		if(route.getTrips().size() <= 5)
+			route.getTripDefault().setMaxAndMin(tripDataList);
+		
+		
+		em.getTransaction().begin();
+		
+		em.persist(trip);
+		em.persist(route);
+		em.persist(route.getTripDefault());
+		
+		em.getTransaction().commit();
+		em.close();
+		resp.getWriter().println("Success!");
+	}
+	
+	
+	private List<TripData> jsonParse(JsonParser parser) throws JsonException{
 		int counter = 0;
+	
+		TripData tripData = new TripData();
+		Stack<String> stack = new Stack<>();
+		
+		List<TripData> tripDataList = new ArrayList<>();
+		
+		if(!parser.hasNext()){
+			throw new JsonException("JSON Parser is empty!");
+		}
+		
 		Calendar tripArrivalDate = new GregorianCalendar();
 		while (parser.hasNext()) {
 			try {
@@ -84,19 +209,23 @@ public class InsertTripDataServlet extends HttpServlet {
 						break;
 					}
 					case "engineRPM": {
-						tripData.setEngineRPM(Long.parseLong(value));
+						tripData.setEngineRPM(Double.parseDouble(value));
 						break;
 					}
 					case "speed": {
-						tripData.setSpeed(Long.parseLong(value));
+						tripData.setSpeed(Double.parseDouble(value));
 						break;
 					}
 					case "fuelLevel": {
-						tripData.setFuelLevel(Long.parseLong(value));
+						tripData.setFuelLevel(Double.parseDouble(value));
+						break;
+					}
+					case "engineLoad" :{
+						tripData.setEngineLoad(Double.parseDouble(value));
 						break;
 					}
 					case "id": {
-						busId = value;
+						obdId = value;
 						break;
 					}
 					case "xAxis": {
@@ -115,11 +244,14 @@ public class InsertTripDataServlet extends HttpServlet {
 						tripData.setTemperature(Long.parseLong(value));
 						break;
 					}
-					case "latitude": {
-						tripData.setLatitude(Integer.parseInt(value));
+					case "lat": {
+						tripData.setLatitude(Double.parseDouble(value));
 					}
-					case "longitude": {
-						tripData.setLongitude(Integer.parseInt(value));
+					case "lng": {
+						tripData.setLongitude(Double.parseDouble(value));
+					}
+					case "distance": {
+						tripData.setDistance(Double.parseDouble(value));
 					}
 					}
 					break;
@@ -127,10 +259,6 @@ public class InsertTripDataServlet extends HttpServlet {
 				case VALUE_NUMBER: {
 					String value = parser.getString();
 					switch (stack.pop()) {
-					case "id": {
-						busId = value;
-						break;
-					}
 					case "timeStamp": {
 						Calendar calendar = new GregorianCalendar();
 						calendar.setTimeInMillis(Long.parseLong(value));
@@ -138,15 +266,19 @@ public class InsertTripDataServlet extends HttpServlet {
 						break;
 					}
 					case "engineRPM": {
-						tripData.setEngineRPM(Long.parseLong(value));
+						tripData.setEngineRPM(Double.parseDouble(value));
+						break;
+					}
+					case "engineLoad" :{
+						tripData.setEngineLoad(Double.parseDouble(value));
 						break;
 					}
 					case "speed": {
-						tripData.setSpeed(Long.parseLong(value));
+						tripData.setSpeed(Double.parseDouble(value));
 						break;
 					}
 					case "fuelLevel": {
-						tripData.setFuelLevel(Long.parseLong(value));
+						tripData.setFuelLevel(Double.parseDouble(value));
 						break;
 					}
 					case "xAxis": {
@@ -165,98 +297,23 @@ public class InsertTripDataServlet extends HttpServlet {
 						tripData.setTemperature(Long.parseLong(value));
 						break;
 					}
-					case "latitude": {
-						tripData.setLatitude(Integer.parseInt(value));
+					case "lat": {
+						tripData.setLatitude(Double.parseDouble(value));
 					}
-					case "longitude": {
-						tripData.setLongitude(Integer.parseInt(value));
+					case "lng": {
+						tripData.setLongitude(Double.parseDouble(value));
 					}
+					case "distance": {
+						tripData.setDistance(Double.parseDouble(value));
 					}
-					break;
 				}
+					break;
+			}
 				}
 			} catch (Exception e) {
-				resp.getWriter().println("Some errors occured");
+				e.printStackTrace();
 			}
-
 		}
-		List<Trip> tripList = new ArrayList();
-		Trip trip = new Trip();
-		Vehicle vehicle = null;
-
-		EntityManager em = emf.createEntityManager();
-		Query query = em.createNamedQuery("Driver.findOne");
-		query.setParameter("r", "653838949222");
-
-		List<Driver> list = query.getResultList();
-		Driver driver = null;
-
-		if (list.isEmpty()) {
-			driver = new Driver();
-			driver.setName("Rodrigo Buhler");
-			driver.setRegistration("653838949222");
-			driver.setTrips(tripList);
-			em.getTransaction().begin();
-			em.persist(driver);
-			em.getTransaction().commit();
-		} else if (list.size() == 1) {
-			driver = list.get(0);
-		} else {
-			resp.getWriter().println("Error! There are more than 1 entry in Driver for this registration number");
-		}
-
-		query = em.createNamedQuery("Vehicle.findOne");
-		query.setParameter("v", "ABC-213435464353");
-		List<Vehicle> listV = query.getResultList();
-
-		if (listV.isEmpty()) {
-			vehicle = new Vehicle();
-			vehicle.setCapacity(5);
-			vehicle.setChassi("ABC-213435464353");
-			vehicle.setFuelType("Gasoline");
-			vehicle.setPlate("IHC-8657");
-			vehicle.setModel("Sandeiro");
-			vehicle.setYear(2014);
-			em.getTransaction().begin();
-			em.persist(vehicle);
-			em.getTransaction().commit();
-		} else if (list.size() == 1) {
-			vehicle = listV.get(0);
-		} else {
-			resp.getWriter().println("Error! There are more than 1 entry in Vehicle for this registration number");
-		}
-
-		trip.setDistance(2000);
-		trip.setDriver(driver);
-		driver.setTrips(tripList);
-		trip.setVehicle(vehicle);
-		trip.setTripDatas(tripDataList);
-		tripList.add(trip);
-		vehicle.setTrips(tripList);
-		
-		int countTrip = 0;
-		for (TripData tripData2 : tripDataList) {
-			countTrip++;
-		
-			em.getTransaction().begin();
-			if(countTrip == 1){
-				trip.setArrivalTime(tripData2.getDateTime());
-			}else if(countTrip == tripDataList.size()){				
-				trip.setDepartureTime(tripData2.getDateTime());
-			}
-			tripData2.setTrip(trip);
-			
-			em.persist(tripData2);
-			em.getTransaction().commit();
-
-		}
-		
-		em.getTransaction().begin();
-		
-		em.persist(trip);
-
-		em.getTransaction().commit();
-		em.close();
-		resp.getWriter().println("Success!");
+		return tripDataList;
 	}
 }

@@ -21,10 +21,10 @@
 				app.placeAt("content");
 		</script>-->
 
-<script type="text/javascript">  
+<script type="text/javascript">
             //1. Create a JSON model (oModel).
             //
-            var jsonModel = [           
+            var jsonModel = [
         		{	id : "ChartDrivers",
 	        		title : "Best Drivers",
 	        		info: "Ranking",
@@ -33,43 +33,43 @@
 	        		//number:6,
 	        		//numberUnit: "NF-e(s)",
 	        		infoState: sap.ui.core.ValueState.Error},
-	        		
+
 	       		{	id : "TripMonitor",
 	               	title : "Trip Monitor",
 	               	//info: "",
 	               	icon:"feed",
 	               	activeIcon:"feed",
 	               	numberUnit: ""},
-	               	
+
 	       		{	id : "DistanceByRoute",
 	               	title : "Routes Chart",
 	               	info: "Distance by route",
 	               	icon:"pie-chart",
 	               	activeIcon:"pie-chart",
 	               	numberUnit: ""},
-	               	
-	               	
+
+
                	/* {	id : "DANFE",
                    	title : "DANFE",
                    	info: "Print DANFE",
                    	icon:"print",
                    	activeIcon:"print",
                    	number:8
-                }, 
+                },
 				{	id: "ICMS",
         			number: 259.21,
         			numberUnit: "R$",
     			    title : "ICMS",
     			    infoState: sap.ui.core.ValueState.Error,
     			    info: "Global - Year to Date"},
-    			
+
     			{	id : "IPI",
                    	title : "IPI",
                    	number: 151.21,
         		    infoState: sap.ui.core.ValueState.Error,
                    	numberUnit: "R$",
                    	info: "Global - Year to Date"},*/
-    			    
+
             	{	id : "MaintenanceRequired",
                 	title : "Maintenance Required",
                 	info: "",
@@ -78,7 +78,7 @@
                 	number:4,
                 	numberUnit: "Actions",
                 	infoState: sap.ui.core.ValueState.Warning},
-                	
+
                 {	id : "Routes",
                    	title : "Mantain Routes",
                    	//info: "NF-es in transport",
@@ -93,26 +93,35 @@
                    	icon:"car-rental",
                    	activeIcon:"car-rental",
                    	infoState: sap.ui.core.ValueState.Success}  ,
-                   	
+
                 {  	id: "Drivers",
         			//number: 1,
     			    title : "Maintain Drivers",
     			    icon:"employee",
     			    infoState: sap.ui.core.ValueState.Error,
-    			    info: ""}
-       		];              
-            
+    			    info: ""},
+							
+							{	id : "Routes",
+									title : "Mantain Routes",
+									//info: "NF-es in transport",
+									icon:"map-2",
+									activeIcon:"map-2",
+									//number:4,
+									//numberUnit: "NF-e(s)",
+									infoState: sap.ui.core.ValueState.Success}
+       		];
+
             var oModel = new sap.ui.model.json.JSONModel();
         	oModel.setData({
         		modelData : jsonModel
         	});
- 					 	
-        	//2. Define a factory method for StandardTile elements (standardTileFactory).    
+
+        	//2. Define a factory method for StandardTile elements (standardTileFactory).
             var standardTileFactory = function(sId, oContext) {
             	//bind all properties from https://sapui5.netweaver.ondemand.com/sdk/#docs/api/symbols/sap.m.StandardTile.html
             	//except Type which had little effect Code:oTile.setType(sap.m.StandardTileType.Monitor);
             	//+ include our id from the model as CustomData to the TreeNode
-            	
+
         		var oTile = new sap.m.StandardTile(sId)
             		.bindProperty("title",oContext.sPath+"/title")
             		.bindProperty("info",oContext.sPath+"/info")
@@ -122,10 +131,10 @@
             		.bindProperty("infoState",oContext.sPath+"/infoState")
             		//.bindProperty("icon",oContext.sPath+"/icon")
             		.addCustomData(new sap.ui.core.CustomData({
-        				key: "modelId",	
+        				key: "modelId",
         				value: oContext.oModel.getProperty(oContext.sPath+"/id"),
         				writeToDom: true}));
- 	
+
         		//Provide URI for icons
         		var iconSrc = oContext.oModel.getProperty(oContext.sPath+"/icon");
         		if(iconSrc){
@@ -137,42 +146,42 @@
         			oTile.setActiveIcon(sap.ui.core.IconPool.getIconURI(activeIconSrc));
         		}
         		return oTile;
-     			
+
         	};
-            
+
         	//3. Define a method for dynamically populate the TreeNodes of a Tree based on its model (createDynamicTreeNodesFromModel)
             function createDynamicTilesFromModel(oTileContainer, modelPath) {
             	if(oTileContainer.hasModel()==false){
             		console.log(oTileContainer + " has no model bound to it. Cannot create Tiles");
             		return;
             	}
-            	
-            	oTileContainer.bindAggregation("tiles",modelPath, standardTileFactory);	
+
+            	oTileContainer.bindAggregation("tiles",modelPath, standardTileFactory);
             	//oTileContainer.addTile(numTile);
-            	
+
             }
-        	
-             
+
+
             //4. Create an event handler method for when a Tile is clicked
             function onMyTileClicked(oControlEvent){
             	//COMMON code for all event handlers
               var selectedId = oControlEvent.getParameter("id");
               var selectedModelId=null;
-              
+
               var customDataList = oControlEvent.getSource().getCustomData();
               if(customDataList!=null && customDataList.length==1 && customDataList[0].getKey("modelId")){
             	  modelId = customDataList[0].getValue("modelId");
               }else {
             	  console.log("modelId not bound as CustomData to the TreeNode");
               }
-              
+
               //selectedId now refers to the TreeNode element
               //selectedModelId now refers to the id field from the model
-              
+
               //SPECIFIC code for this Tree
-              //just updates a TextView with the ids we have found. 
+              //just updates a TextView with the ids we have found.
               if (modelId == "Drivers"){
-            	  location.href = "drivers.html";			
+            	  location.href = "drivers.html";
               }
 
               else if (modelId == "Vehicles"){
@@ -192,16 +201,16 @@
             	  //alert("onTileNodeClicked ModelId:"+modelId + " \nsapui5 component id:"+selectedId);
               }
             }
-            
+
             //5a. Create a TileContainer component
-        	//5b. Set the Model of the TileContainer component 
+        	//5b. Set the Model of the TileContainer component
         	var MyTileContainer = new sap.m.TileContainer("MyTileContainer");
             MyTileContainer.setModel(oModel);
-            
+
             //5c. Dynamically create TileNodes from the model
             createDynamicTilesFromModel(MyTileContainer, "/modelData");
-            
-            //5d. Add event handler to all tiles 
+
+            //5d. Add event handler to all tiles
             //Event handler is a different for each TileContainer)
             var tiles = MyTileContainer.getTiles();
             if(tiles!=null && tiles.length>=1){

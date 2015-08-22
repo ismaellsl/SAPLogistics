@@ -20,6 +20,7 @@ import sap.logistics.persistence.Passenger;
 import sap.logistics.persistence.Route;
 import sap.logistics.persistence.Trip;
 import sap.logistics.persistence.TripData;
+import sap.logistics.persistence.TripDefault;
 import sap.logistics.persistence.Vehicle;
 import sap.logistics.persistence.types.MaintenanceReason;
 import sap.logistics.persistence.types.MaintenanceType;
@@ -68,8 +69,8 @@ public class InserindoDataServleet extends HttpServlet {
 			rout.setDistance(80);
 			rout.setTrips(trips);
 			rout.setPassagers(passenger);
-			rout.setArrivalTime(dataChegada);
-			rout.setDepartureTime(data);
+			rout.setArrivalTime(2100);
+			rout.setDepartureTime(2300);
 
 			veh.setCapacity(45);
 			veh.setChassi("9WT2324232A33241" );
@@ -139,8 +140,8 @@ public class InserindoDataServleet extends HttpServlet {
 			rout.setDistance(87);
 			rout.setTrips(trips);
 			rout.setPassagers(passenger);
-			rout.setArrivalTime(dataChegada);
-			rout.setDepartureTime(data);
+			rout.setArrivalTime(2100);
+			rout.setDepartureTime(2300);
 
 			veh.setCapacity(45);
 			veh.setChassi("1223YIOHS1SD876911" );
@@ -212,8 +213,8 @@ public class InserindoDataServleet extends HttpServlet {
 			rout.setDistance(89);
 			rout.setTrips(trips);
 			rout.setPassagers(passenger);
-			rout.setArrivalTime(dataChegada);
-			rout.setDepartureTime(data);
+			rout.setArrivalTime(2100);
+			rout.setDepartureTime(2300);
 
 			veh.setCapacity(45);
 			veh.setChassi("Y22HOHS1SD876922" );
@@ -285,8 +286,8 @@ public class InserindoDataServleet extends HttpServlet {
 			rout.setDistance(81);
 			rout.setTrips(trips);
 			rout.setPassagers(passenger);
-			rout.setArrivalTime(dataChegada);
-			rout.setDepartureTime(data);
+			rout.setArrivalTime(2100);
+			rout.setDepartureTime(2300);
 
 			veh.setCapacity(15);
 			veh.setChassi("ZZ9879S1SD12345" );
@@ -357,8 +358,8 @@ public class InserindoDataServleet extends HttpServlet {
 			rout.setDistance(92);
 			rout.setTrips(trips);
 			rout.setPassagers(passenger);
-			rout.setArrivalTime(dataChegada);
-			rout.setDepartureTime(data);
+			rout.setArrivalTime(2100);
+			rout.setDepartureTime(2300);
 
 			veh.setCapacity(15);
 			veh.setChassi("ZZ9879S1SD12347" );
@@ -455,6 +456,37 @@ public class InserindoDataServleet extends HttpServlet {
 			tridata.setSpeed((long) Math.random()*101);
 			tridata.setTrip(tri);
 			
+			
+			Vehicle v1 = new Vehicle();
+			Driver d1 = new Driver();
+			Route route = new Route();
+			List<Route> routes = new ArrayList<>();
+			
+			route.setArrivalLocation("Av.SAP");
+			route.setDepertureLocation("Av.SAP");
+			route.setDepartureTime(0700);
+			route.setArrivalTime(1800);
+			route.setTripDefault(new TripDefault());
+			
+			routes.add(route);
+			
+			v1.setCapacity(5);
+			v1.setChassi("213JHSFLS8968726kAKD");
+			v1.setFiscalNumber("65756444346");
+			v1.setFuelType("Gasoline");
+			v1.setPlate("IRO-7462");
+			v1.setObdId("64-1C-67-75-7F-0D");
+			v1.setYear(2014);
+			v1.setVehicleInscription("66");
+			v1.setRoutes(routes);
+			v1.setDriver(d1);
+			
+			d1.setName("Rodrigo Buhler");
+			d1.setRegistration("122142256457853");
+			d1.setVehicle(v1);
+			
+			route.setVehicle(v1);
+			
 			entityManager.getTransaction().begin();
 			entityManager.persist(main);
 			entityManager.persist(main2);
@@ -470,6 +502,11 @@ public class InserindoDataServleet extends HttpServlet {
 			entityManager.persist(tridata);
 			entityManager.persist(veh);
 			entityManager.persist(pass);
+			
+			entityManager.persist(v1);
+			entityManager.persist(route);
+			entityManager.persist(d1);
+			entityManager.persist(route.getTripDefault());
 
 			entityManager.getTransaction().commit();
 			

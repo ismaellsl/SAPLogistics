@@ -6,13 +6,19 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Vehicle.findOne", query = "SELECT v FROM Vehicle v WHERE v.chassi = :v") })
+@NamedQueries({ 
+	@NamedQuery(name = "Vehicle.findOne", query = "SELECT v FROM Vehicle v WHERE v.chassi = :v"),
+	@NamedQuery(name = "Vehicle.findByOBD", query = "SELECT v FROM Vehicle v WHERE v.obdId = :v") 
+})
 public class Vehicle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@Column(unique = true)
+	private String obdId;
 
 	private String plate;
 
@@ -31,6 +37,12 @@ public class Vehicle implements Serializable {
 
 	@OneToMany(mappedBy = "vehicle")
 	private List<Maintenance> maintenances;
+	
+	@OneToMany(mappedBy = "vehicle")
+	private List<Route> routes;
+	
+	@OneToOne
+	private Driver driver;
 
 	public List<Trip> getTrips() {
 		return trips;
@@ -115,4 +127,35 @@ public class Vehicle implements Serializable {
 	public void setMaintenance(List<Maintenance> maintenances) {
 		this.maintenances = maintenances;
 	}
+
+	public String getObdId() {
+		return obdId;
+	}
+
+	public void setObdId(String obdId) {
+		this.obdId = obdId;
+	}
+
+	public void setMaintenances(List<Maintenance> maintenances) {
+		this.maintenances = maintenances;
+	}
+
+	public List<Route> getRoutes() {
+		return routes;
+	}
+
+	public void setRoutes(List<Route> routes) {
+		this.routes = routes;
+	}
+
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+
+
+
 }

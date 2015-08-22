@@ -9,13 +9,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "Trip.countByRoute", query = "SELECT COUNT(t.id) FROM Trip t WHERE t.route = :r")
+})
 public class Trip implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -25,7 +32,6 @@ public class Trip implements Serializable {
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "vehicle_id")
-	
 	private Vehicle vehicle;
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
@@ -44,7 +50,7 @@ public class Trip implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar arrivalTime;
 	private int passengerNr;
-	private long distance;
+	private double distance;
 	
 	
 	public int getPassengerNr() {
@@ -53,12 +59,7 @@ public class Trip implements Serializable {
 	public void setPassengerNr(int passengerNr) {
 		this.passengerNr = passengerNr;
 	}
-	public long getDistance() {
-		return distance;
-	}
-	public void setDistance(long distance) {
-		this.distance = distance;
-	}
+	
 	public int getId() {
 		return id;
 	}
@@ -98,7 +99,11 @@ public class Trip implements Serializable {
 	public void setArrivalTime(Calendar arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
-
-	
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
 
 }

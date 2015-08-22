@@ -8,8 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,63 +28,36 @@ public class TripData implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dateTime;
 	
-	private long engineRPM;
+	private double engineRPM;
 	private long x;
 	private long y;
 	private long z;
-	private long speed;
+	private double speed;
 	private long temperature;
-	private long engineLoad;
-	private long fuelLevel;
-	private int latitude;
-	private int longitude;
+	private double engineLoad;
+	private double fuelLevel;
+	private double latitude;
+	private double longitude;
+	private double distance;
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "trip_id")
 	private Trip trip;
-	
-	public int getId() {
-		return id;
-	}
-	
-	public Trip getTrip() {
-		return trip;
-	}
-	
-	public void setTrip(Trip trip) {
-		this.trip = trip;
-	}
 
-	public long getEngineRPM() {
-		return engineRPM;
-	}
-	
-	public void setEngineRPM(long engineRPM) {
-		this.engineRPM = engineRPM;
-	}
-	
-	public long getSpeed() {
-		return speed;
-	}
-	
-	public void setSpeed(long speed) {
-		this.speed = speed;
-	}
-	
-	public long getFuelLevel() {
-		return fuelLevel;
-	}
-	
-	public void setFuelLevel(long fuelLevel) {
-		this.fuelLevel = fuelLevel;
-	}
-	
 	public Calendar getDateTime() {
 		return dateTime;
 	}
-	
+
 	public void setDateTime(Calendar dateTime) {
 		this.dateTime = dateTime;
+	}
+
+	public double getEngineRPM() {
+		return engineRPM;
+	}
+
+	public void setEngineRPM(double engineRPM) {
+		this.engineRPM = engineRPM;
 	}
 
 	public long getX() {
@@ -106,7 +83,15 @@ public class TripData implements Serializable{
 	public void setZ(long z) {
 		this.z = z;
 	}
-	
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
 	public long getTemperature() {
 		return temperature;
 	}
@@ -115,28 +100,56 @@ public class TripData implements Serializable{
 		this.temperature = temperature;
 	}
 
-	public long getEngineLoad() {
+	public double getEngineLoad() {
 		return engineLoad;
 	}
 
-	public void setEngineLoad(long engineLoad) {
+	public void setEngineLoad(double engineLoad) {
 		this.engineLoad = engineLoad;
 	}
 
-	public int getLatitude() {
+	public double getFuelLevel() {
+		return fuelLevel;
+	}
+
+	public void setFuelLevel(double fuelLevel) {
+		this.fuelLevel = fuelLevel;
+	}
+
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(int latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-	public int getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(int longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	public Trip getTrip() {
+		return trip;
+	}
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
+
+	public int getId() {
+		return id;
+	}
+	
 }

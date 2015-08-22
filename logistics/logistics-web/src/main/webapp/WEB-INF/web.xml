@@ -4,7 +4,7 @@
 							http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		version="2.5"
 		xmlns="http://java.sun.com/xml/ns/javaee" id="WebApp_1437938739118">
-	<display-name id="DisplayName_1437938739376">Logistics Web Application</display-name>
+	<display-name>Logistics Web Application</display-name>
 	<servlet id="Servlet_1437938739384">
 		<servlet-name>JPARefScenarioServlet</servlet-name>
 		<servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>

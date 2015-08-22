@@ -57,8 +57,8 @@ public class TesteMain {
 			rout.setDistance(numero);
 			rout.setTrips(trips);
 			rout.setPassagers(passenger);
-			rout.setArrivalTime(data);
-			rout.setDepartureTime(data);
+			rout.setArrivalTime(12321);
+			rout.setDepartureTime(123214);
 
 			veh.setCapacity(numero);
 			veh.setChassi("Chassi" + numero);

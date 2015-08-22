@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -15,9 +17,6 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Route implements Serializable {
-	public int getId() {
-		return id;
-	}
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,10 +24,8 @@ public class Route implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	
 	@OneToOne
-	private Trip tripDefault;
-	
+	private TripDefault tripDefault;	
 	
 	@OneToMany(mappedBy = "route")
 	private List<Passenger> passagers;
@@ -36,6 +33,23 @@ public class Route implements Serializable {
 	@OneToMany(mappedBy = "route")
 	private List<Trip> trips;
 
+	private String depertureLocation;
+	private String arrivalLocation;
+	private long distance;
+	
+	//must be like 1520 = 15:20
+	private int departureTime;
+	//must be like 1520 = 15:20
+	private int arrivalTime;
+	
+	@ManyToOne
+	@JoinColumn(name = "vehicle_id")
+	private Vehicle vehicle;
+	
+	public int getId() {
+		return id;
+	}
+	
 	public List<Passenger> getPassagers() {
 		return passagers;
 	}
@@ -52,15 +66,6 @@ public class Route implements Serializable {
 		this.trips = trips;
 	}
 
-	private String depertureLocation;
-	private String arrivalLocation;
-	private long distance;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar departureTime;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar arrivalTime;
 
 	public String getDepertureLocation() {
 		return depertureLocation;
@@ -86,28 +91,39 @@ public class Route implements Serializable {
 		this.distance = distance;
 	}
 
-	public Calendar getDepartureTime() {
-		return departureTime;
-	}
-
-	public void setDepartureTime(Calendar departureTime) {
-		this.departureTime = departureTime;
-	}
-
-	public Calendar getArrivalTime() {
-		return arrivalTime;
-	}
-
-	public void setArrivalTime(Calendar arrivalTime) {
-		this.arrivalTime = arrivalTime;
-	}
-
-	public Trip getTripDefault() {
+	public TripDefault getTripDefault() {
 		return tripDefault;
 	}
 
-	public void setTripDefault(Trip tripDefault) {
+	public void setTripDefault(TripDefault tripDefault) {
 		this.tripDefault = tripDefault;
 	}
+	
+	public int tripListSize(){
+		return this.trips.size();
+	}
 
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+
+	public int getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(int departureTime) {
+		this.departureTime = departureTime;
+	}
+
+	public int getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(int arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
 }
