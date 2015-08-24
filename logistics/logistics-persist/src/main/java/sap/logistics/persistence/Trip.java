@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,7 +53,6 @@ public class Trip implements Serializable {
 	private Calendar arrivalTime;
 	private int passengerNr;
 	private double distance;
-	
 	
 	public int getPassengerNr() {
 		return passengerNr;

@@ -23,9 +23,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.lf5.Log4JLogRecord;
-
 import sap.logistics.persistence.Driver;
 import sap.logistics.persistence.Route;
 import sap.logistics.persistence.Trip;
@@ -58,7 +55,6 @@ public class InsertTripDataServlet extends HttpServlet {
 		
 		JsonParserFactory factory = Json.createParserFactory(null);
 		JsonParser parser = factory.createParser(new StringReader(text));
-		Stack<String> stack = new Stack<>();
 		TripData tripData = new TripData();
 		List<TripData> tripDataList = null;
 		try{
@@ -72,7 +68,6 @@ public class InsertTripDataServlet extends HttpServlet {
 		
 		List<Trip> tripList = new ArrayList();
 		Trip trip = new Trip();
-		
 
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createNamedQuery("Driver.findOne");
@@ -105,7 +100,7 @@ public class InsertTripDataServlet extends HttpServlet {
 			route = routes.get(0);
 		}else{
 			
-			Calendar routeCalendar;
+	
 			for (Route route2 : routes) {
 				
 				if(route2.getDepartureTime() >= Integer.parseInt((tripDataList.get(0).getDateTime().get(Calendar.HOUR_OF_DAY)) + "" +
@@ -124,6 +119,7 @@ public class InsertTripDataServlet extends HttpServlet {
 		trip.setRoute(route);
 		
 		
+		
 		int countTrip = 0;
 		double beginDistance = 0;
 		double endDistance = 0;
@@ -133,10 +129,11 @@ public class InsertTripDataServlet extends HttpServlet {
 		
 			em.getTransaction().begin();
 			if(countTrip == 1){
-				trip.setArrivalTime(tripData2.getDateTime());
-				beginDistance = tripData2.getDistance();
-			}else if(countTrip == tripDataList.size()){				
 				trip.setDepartureTime(tripData2.getDateTime());
+				beginDistance = tripData2.getDistance();
+			}
+			if(countTrip == tripDataList.size()){				
+				trip.setArrivalTime(tripData2.getDateTime());
 				endDistance = tripData2.getDistance();
 			}
 			tripData2.setTrip(trip);
@@ -150,15 +147,19 @@ public class InsertTripDataServlet extends HttpServlet {
 		else
 			trip.setDistance(endDistance - beginDistance);
 		
-		if(route.getTrips().size() <= 5)
-			route.getTripDefault().setMaxAndMin(tripDataList);
-		
+		TripDefault tripDef = route.getTripDefault();
+		if(route.getTrips().size() <= 5){
+			tripDef.setMaxAndMin(tripDataList);
+			tripDef.setRoute(route);
+			route.setTripDefault(tripDef);
+		}
+		trip.setRoute(route);
 		
 		em.getTransaction().begin();
 		
 		em.persist(trip);
 		em.persist(route);
-		em.persist(route.getTripDefault());
+		em.persist(tripDef);
 		
 		em.getTransaction().commit();
 		em.close();
