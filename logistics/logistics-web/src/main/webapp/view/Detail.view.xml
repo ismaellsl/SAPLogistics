@@ -6,19 +6,13 @@
 		<HBox>
 			<ObjectHeader title="Trip Details" number="">
 				<attributes>
-					<ObjectAttribute text="{FORM}" />
-					<ObjectAttribute text="{REGIO}" />
+					<ObjectAttribute title="Distance" text="{Distance}" />
+					<ObjectAttribute title="Passengers" text="{PassengerNr}" />
 				</attributes>
 				<firstStatus>
-					<ObjectStatus
-						text="{
-						path: 'status',
-						formatter: 'nfeapp.WebContent.util.Formatter.statusText'
-					}"
-						state="{
-						path: 'status',
-						formatter: 'nfeapp.WebContent.util.Formatter.statusState'
-					}" />
+					<ObjectStatus title="Status"
+						text="{Status}"
+						state="{Status}" />
 				</firstStatus>
 			</ObjectHeader>
 		</HBox>
@@ -45,7 +39,7 @@
 			</items>-->
 			<items>
 				<IconTabFilter icon="sap-icon://area-chart"
-				
+
 					iconColor="Negative">
 					<form:SimpleForm id="TripDataForm" minWidth="1024">
 						<core:Title text="Trip Data" />
@@ -86,7 +80,17 @@
 							</columns>
 							<ColumnListItem>
 								<cells>
-									<ObjectIdentifier title="{DateTime}" />
+									<ObjectIdentifier title="{
+										path: 'DateTime',
+										type: 'sap.ui.model.type.DateTime',
+										formatOptions: {
+												style: 'short',
+												source: {
+													pattern: 'HH:mm:ss'
+												}
+										}
+
+									}" />
 									<ObjectIdentifier title="{EngineLoad}" />
 									<ObjectIdentifier title="{EngineRPM}" />
 									<Text text="{FuelLevel}" />
@@ -103,7 +107,7 @@
 			<items>
 				<IconTabFilter icon="sap-icon://shipping-status"
 					iconColor="Negative">
-					
+
 					<form:SimpleForm id="VehicleDetails" minWidth="1024">
 						<core:Title text="Vehicle Details" />
 						<Label text="Model" />
@@ -126,7 +130,7 @@
 			<items>
 				<IconTabFilter icon="sap-icon://supplier"
 					iconColor="Negative">
-					
+
 					<form:SimpleForm id="DriverDetails" minWidth="1024">
 						<core:Title text="Driver Details" />
 						<Label text="ID" />
@@ -143,7 +147,7 @@
 			<items>
 				<IconTabFilter icon="sap-icon://map-2"
 					iconColor="Negative">
-					
+
 					<form:SimpleForm id="RouteDetails" minWidth="1024">
 						<core:Title text="Route Details" />
 						<Label text="Arrival Location" />
@@ -160,7 +164,7 @@
 				</IconTabFilter>
 			</items>
 		</IconTabBar>
-		
+
 		<!-- <Table headerText="{i18n>LineItemTableHeader}" items="{items}">
 			<columns>
 				<Column>
