@@ -1,6 +1,7 @@
 <core:View controllerName="nfeapp.WebContent.view.Detail"
 	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core"
-	xmlns:l="sap.ui.layout"  xmlns:commons="sap.ui.commons">
+	xmlns:l="sap.ui.layout"  xmlns:commons="sap.ui.commons"
+	>
 	<Page title="{i18n>DetailTitle}" class="sapUiFioriObjectPage"
 		showNavButton="{device>/isPhone}" navButtonPress="handleNavButtonPress">
 		<HBox>
@@ -161,6 +162,9 @@
 						<Label text="Distance" />
 						<Text text="{RouteDetails/Distance}" />
 					</form:SimpleForm>
+					<core:HTML content='&lt;iframe src=&quot;test.html&quot; width=&quot;100%&quot; height=&quot;400&quot; frameBorder=&quot;0&quot;&gt;'>
+					</core:HTML>
+					
 				</IconTabFilter>
 			</items>
 		</IconTabBar>

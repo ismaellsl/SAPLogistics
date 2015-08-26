@@ -9,20 +9,20 @@
 				</contentLeft>
 			</Bar>
 		</subHeader>
+		
 		<List id="list" mode="{device>/listMode}" select="handleListSelect"
 			items="{/Trips?$expand=VehicleDetails,DriverDetails,RouteDetails}">
 			<!-- text="{ path: 'eventDate', type: 'sap.ui.model.type.DateTime' }" -->
-			<ObjectListItem type="{device>/listItemType}" press="handleListItemPress"
+			<ObjectListItem type="{device>/listItemType}" press="handleListItemPress" 				
 				title="{
 					path: 'DepartureTime',
 					type: 'sap.ui.model.type.DateTime',
 					formatOptions: {
 							style: 'short',
 							source: {
-								pattern: 'HH:mm:ss'
+								pattern: 'HH:mm:ss.SSS'
 							}
 					}
-
 				}"
 				number="{Distance}" icon="sap-icon://bus-public-transport">
 				<attributes>
