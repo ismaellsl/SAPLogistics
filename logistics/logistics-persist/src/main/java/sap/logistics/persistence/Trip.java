@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +22,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import sap.logistics.persistence.types.MaintenanceReason;
+import sap.logistics.persistence.types.TripStatus;
 
 @Entity
 @NamedQueries({
@@ -53,7 +58,15 @@ public class Trip implements Serializable {
 	private Calendar arrivalTime;
 	private int passengerNr;
 	private double distance;
-	
+	@Enumerated(EnumType.STRING)
+	private TripStatus status;
+		
+	public TripStatus getStatus() {
+		return status;
+	}
+	public void setStatus(TripStatus status) {
+		this.status = status;
+	}
 	public int getPassengerNr() {
 		return passengerNr;
 	}

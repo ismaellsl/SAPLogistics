@@ -24,6 +24,7 @@ import sap.logistics.persistence.TripDefault;
 import sap.logistics.persistence.Vehicle;
 import sap.logistics.persistence.types.MaintenanceReason;
 import sap.logistics.persistence.types.MaintenanceType;
+import sap.logistics.persistence.types.TripStatus;
 
 public class InserindoDataServleet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -89,6 +90,7 @@ public class InserindoDataServleet extends HttpServlet {
 			tri.setPassengerNr(45);
 			tri.setRoute(rout);
 			tri.setVehicle(veh);
+			tri.setStatus(TripStatus.Success);
 			
 			tridata.setDateTime(data);
 			tridata.setEngineRPM((long) Math.random()*101);
@@ -160,6 +162,8 @@ public class InserindoDataServleet extends HttpServlet {
 			tri.setPassengerNr(numero);
 			tri.setRoute(rout);
 			tri.setVehicle(veh);
+			tri.setStatus(TripStatus.Error);
+			
 			
 			tridata.setDateTime(data);
 			tridata.setEngineRPM((long) Math.random()*101);
@@ -233,6 +237,7 @@ public class InserindoDataServleet extends HttpServlet {
 			tri.setPassengerNr(numero);
 			tri.setRoute(rout);
 			tri.setVehicle(veh);
+			tri.setStatus(TripStatus.Warning);
 			
 			tridata.setDateTime(data);
 			tridata.setEngineRPM((long) Math.random()*101);
@@ -306,6 +311,7 @@ public class InserindoDataServleet extends HttpServlet {
 			tri.setPassengerNr(numero);
 			tri.setRoute(rout);
 			tri.setVehicle(veh);
+			tri.setStatus(TripStatus.Success);
 			
 			tridata.setDateTime(data);
 			tridata.setEngineRPM((long) Math.random()*101);
@@ -449,6 +455,7 @@ public class InserindoDataServleet extends HttpServlet {
 			tri.setPassengerNr(numero);
 			tri.setRoute(rout);
 			tri.setVehicle(veh);
+			tri.setStatus(TripStatus.Success);
 			
 			tridata.setDateTime(data);
 			tridata.setEngineRPM((long) Math.random()*101);

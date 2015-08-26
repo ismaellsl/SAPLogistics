@@ -11,22 +11,19 @@
 		</subHeader>
 		<List id="list" mode="{device>/listMode}" select="handleListSelect"
 			items="{/Trips?$expand=VehicleDetails,DriverDetails,RouteDetails}">
+			<!-- text="{ path: 'eventDate', type: 'sap.ui.model.type.DateTime' }" -->
 			<ObjectListItem type="{device>/listItemType}" press="handleListItemPress"
-				title="{DepartureTime}" number="{Passengernr}"
-				icon="sap-icon://bus-public-transport">
+				title="{path: 'DepartureTime',
+										type: 'sap.ui.model.type.DateTime'
+										}"
+				number="{Distance}" icon="sap-icon://bus-public-transport">
 				<attributes>
 					<ObjectAttribute text="{VehicleDetails/Plate}" />
 				</attributes>
 				<firstStatus>
 					<ObjectStatus
-						text="{
-							path: 'status',
-							formatter: 'nfeapp.WebContent.util.Formatter.statusText'
-						}"
-						state="{
-							path: 'status',
-							formatter: 'nfeapp.WebContent.util.Formatter.statusState'
-						}" />
+						text="{Status}"
+						state="{Status}" />
 				</firstStatus>
 			</ObjectListItem>
 		</List>
