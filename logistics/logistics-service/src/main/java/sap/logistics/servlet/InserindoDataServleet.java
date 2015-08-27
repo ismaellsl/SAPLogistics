@@ -344,15 +344,27 @@ public class InserindoDataServleet extends HttpServlet {
 			rout = new Route();
 			tri = new Trip();
 			veh = new Vehicle();
+			Vehicle veh1 = new Vehicle();
 			tridata = new TripData();
 
 			trips.add(tri);
 			passenger.add(pass);
-
+			
+			veh1.setCapacity(15);
+			veh1.setChassi("232423RGDSH78667" );
+			veh1.setFiscalNumber("098767576745" );
+			veh1.setFuelType("Gasoline" );
+			veh1.setModel("Mercedes" );
+			veh1.setPlate("IJX-6786" );
+			veh1.setTrips(trips);
+			veh1.setVehicleInscription("590" );
+			veh1.setYear(numero);
+			veh1.setDriver(drive);
+			
 			drive.setName("Deise");
 			drive.setRegistration("445760987972" );
 			drive.setPicture("");
-
+			drive.setVehicle(veh1);
 			pass.setEmail("fabiane@hotmail.com" );
 			pass.setMobileNumber(21326232L);
 			pass.setName("Fabiane" );
@@ -504,6 +516,7 @@ public class InserindoDataServleet extends HttpServlet {
 			entityManager.persist(main7);
 			entityManager.persist(main8);
 			entityManager.persist(drive);
+			entityManager.persist(veh1);
 			entityManager.persist(rout);
 			entityManager.persist(tri);
 			entityManager.persist(tridata);

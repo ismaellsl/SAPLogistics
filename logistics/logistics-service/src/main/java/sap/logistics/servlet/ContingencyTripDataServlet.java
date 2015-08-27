@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sap.logistics.persistence.*;
+import sap.logistics.persistence.types.TripStatus;
 
 
 
@@ -83,41 +84,52 @@ public class ContingencyTripDataServlet extends HttpServlet {
 					String value = parser.getString();
 					switch (stack.pop()) {
 					
+					case "timeStamp": {
+						Calendar calendar = new GregorianCalendar();
+						calendar.setTimeInMillis(Long.parseLong(value));
+						tripData.setDateTime(calendar);
+						break;
+					}
 					case "engineRPM": {
-						if(value.equals("")){ 
-							tripData.setEngineRPM((long) (Math.random()*4001));
-						}else{
-							tripData.setEngineRPM(Long.parseLong(value));
-						}
+						tripData.setEngineRPM(Double.parseDouble(value));
+						break;
+					}
+					case "engineLoad" :{
+						tripData.setEngineLoad(Double.parseDouble(value));
 						break;
 					}
 					case "speed": {
-						if(value.equals("")){ 
-							tripData.setSpeed((long) (Math.random()*53));
-						}else{
-							tripData.setSpeed(Long.parseLong(value));
-						}
+						tripData.setSpeed(Double.parseDouble(value));
 						break;
 					}
 					case "fuelLevel": {
-						tripData.setFuelLevel(60);
-						break;
-					}
-					case "id": {
-						busId = value;
+						tripData.setFuelLevel(Double.parseDouble(value));
 						break;
 					}
 					case "xAxis": {
-						tripData.setX((long) (Math.random()*300));
+						tripData.setX(Long.parseLong(value));
 						break;
 					}
 					case "yAxis": {
-						tripData.setY((long) (Math.random()*300));
+						tripData.setY(Long.parseLong(value));
 						break;
 					}
 					case "zAxis": {
-						tripData.setZ((long) (Math.random()*300));
+						tripData.setZ(Long.parseLong(value));
 						break;
+					}
+					case "temp": {
+						tripData.setTemperature(Long.parseLong(value));
+						break;
+					}
+					case "lat": {
+						tripData.setLatitude(Double.parseDouble(value));
+					}
+					case "lng": {
+						tripData.setLongitude(Double.parseDouble(value));
+					}
+					case "distance": {
+						tripData.setDistance(Double.parseDouble(value));
 					}
 					}
 					break;
@@ -126,41 +138,52 @@ public class ContingencyTripDataServlet extends HttpServlet {
 					String value = parser.getString();
 					switch (stack.pop()) {
 					
+					case "timeStamp": {
+						Calendar calendar = new GregorianCalendar();
+						calendar.setTimeInMillis(Long.parseLong(value));
+						tripData.setDateTime(calendar);
+						break;
+					}
 					case "engineRPM": {
-						if(value.equals("")){ 
-							tripData.setEngineRPM(((long) Math.random()*4001));
-						}else{
-							tripData.setEngineRPM(Long.parseLong(value));
-						}
+						tripData.setEngineRPM(Double.parseDouble(value));
+						break;
+					}
+					case "engineLoad" :{
+						tripData.setEngineLoad(Double.parseDouble(value));
 						break;
 					}
 					case "speed": {
-						if(value.equals("")){ 
-							tripData.setSpeed(((long) Math.random()*53));
-						}else{
-							tripData.setSpeed(Long.parseLong(value));
-						}
+						tripData.setSpeed(Double.parseDouble(value));
 						break;
 					}
 					case "fuelLevel": {
-						tripData.setFuelLevel(60);
-						break;
-					}
-					case "id": {
-						busId = value;
+						tripData.setFuelLevel(Double.parseDouble(value));
 						break;
 					}
 					case "xAxis": {
-						tripData.setX(((long) Math.random()*300));
+						tripData.setX(Long.parseLong(value));
 						break;
 					}
 					case "yAxis": {
-						tripData.setY(((long) Math.random()*300));
+						tripData.setY(Long.parseLong(value));
 						break;
 					}
 					case "zAxis": {
-						tripData.setZ(((long) Math.random()*300));
+						tripData.setZ(Long.parseLong(value));
 						break;
+					}
+					case "temp": {
+						tripData.setTemperature(Long.parseLong(value));
+						break;
+					}
+					case "lat": {
+						tripData.setLatitude(Double.parseDouble(value));
+					}
+					case "lng": {
+						tripData.setLongitude(Double.parseDouble(value));
+					}
+					case "distance": {
+						tripData.setDistance(Double.parseDouble(value));
 					}
 					}
 					break;
@@ -177,7 +200,7 @@ public class ContingencyTripDataServlet extends HttpServlet {
 
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createNamedQuery("Driver.findOne");
-		query.setParameter("r", "653838949222");
+		query.setParameter("r", "445760987972");
 
 		List<Driver> list = query.getResultList();
 		Driver driver = null;
@@ -185,7 +208,7 @@ public class ContingencyTripDataServlet extends HttpServlet {
 		if (list.isEmpty()) {
 			driver = new Driver();
 			driver.setName("Rodrigo Buhler");
-			driver.setRegistration("653838949222");
+			driver.setRegistration("122142256457853");
 			driver.setTrips(tripList);
 			em.getTransaction().begin();
 			em.persist(driver);
@@ -197,7 +220,7 @@ public class ContingencyTripDataServlet extends HttpServlet {
 		}
 
 		query = em.createNamedQuery("Vehicle.findOne");
-		query.setParameter("v", "ABC-213435464353");
+		query.setParameter("v", "213JHSFLS8968726kAKD");
 		List<Vehicle> listV = query.getResultList();
 
 		if (listV.isEmpty()) {
@@ -222,6 +245,7 @@ public class ContingencyTripDataServlet extends HttpServlet {
 		driver.setTrips(tripList);
 		trip.setVehicle(vehicle);
 		trip.setTripDatas(tripDataList);
+		trip.setStatus(TripStatus.Success);
 		tripList.add(trip);
 		vehicle.setTrips(tripList);
 		

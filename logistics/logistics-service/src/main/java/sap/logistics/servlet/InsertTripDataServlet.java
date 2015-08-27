@@ -46,12 +46,7 @@ public class InsertTripDataServlet extends HttpServlet {
 		while ((line = br.readLine()) != null) {
 			text = text.concat("\n" + line);
 		}
-		try {
-			text = text.substring(text.indexOf("["), (text.lastIndexOf("]"))+ 1 ).trim();			
-		} catch (StringIndexOutOfBoundsException e) {
-			resp.getWriter().println(text);
-			e.printStackTrace();
-		}
+		text = text.substring(text.indexOf("["), (text.lastIndexOf("]"))+ 1 ).trim();			
 		
 		JsonParserFactory factory = Json.createParserFactory(null);
 		JsonParser parser = factory.createParser(new StringReader(text));
