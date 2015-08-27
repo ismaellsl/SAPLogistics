@@ -29,6 +29,7 @@ import sap.logistics.persistence.Trip;
 import sap.logistics.persistence.TripData;
 import sap.logistics.persistence.TripDefault;
 import sap.logistics.persistence.Vehicle;
+import sap.logistics.persistence.types.TripStatus;
 
 public class InsertTripDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -84,6 +85,7 @@ public class InsertTripDataServlet extends HttpServlet {
 		driver.setTrips(tripList);
 		trip.setVehicle(vehicle);
 		trip.setTripDatas(tripDataList);
+		trip.setStatus(TripStatus.Success);
 		tripList.add(trip);
 		vehicle.setTrips(tripList);
 		
