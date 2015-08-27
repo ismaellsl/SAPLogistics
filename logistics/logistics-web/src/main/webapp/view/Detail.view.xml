@@ -162,7 +162,9 @@
 						<Label text="Distance" />
 						<Text text="{RouteDetails/Distance}" />
 					</form:SimpleForm>
-					<core:HTML content='&lt;iframe src=&quot;test.html&quot; width=&quot;100%&quot; height=&quot;400&quot; frameBorder=&quot;0&quot;&gt;'>
+					<core:HTML content='&lt;iframe src=&quot;test.html&quot; width=&quot;49%&quot; height=&quot;400&quot; frameBorder=1&quot;0&quot;&gt;'>
+					</core:HTML>
+					<core:HTML content='&lt;iframe src=&quot;test.html&quot; width=&quot;49%&quot; height=&quot;400&quot; frameBorder=1quot;0&quot;&gt;'>
 					</core:HTML>
 					
 				</IconTabFilter>
