@@ -91,15 +91,29 @@ public class ContingencyTripDataServlet extends HttpServlet {
 						break;
 					}
 					case "engineRPM": {
-						tripData.setEngineRPM(Double.parseDouble(value));
+						if(value.equals("")){ 
+							tripData.setEngineRPM((double) (Math.random()*4001));
+						}else{
+							tripData.setEngineRPM(Double.parseDouble(value));
+						}
+						
 						break;
 					}
 					case "engineLoad" :{
-						tripData.setEngineLoad(Double.parseDouble(value));
+						if(value.equals("")){ 
+							tripData.setEngineLoad((double) (Math.random()*4001));
+						}else{
+							tripData.setEngineLoad(Double.parseDouble(value));
+						}
 						break;
 					}
 					case "speed": {
-						tripData.setSpeed(Double.parseDouble(value));
+						if(value.equals("")){ 
+							tripData.setSpeed((double) (Math.random()*60));
+						}else{
+							tripData.setSpeed(Double.parseDouble(value));
+						}
+						
 						break;
 					}
 					case "fuelLevel": {
@@ -107,26 +121,54 @@ public class ContingencyTripDataServlet extends HttpServlet {
 						break;
 					}
 					case "xAxis": {
-						tripData.setX(Long.parseLong(value));
+						if(value.equals("")){ 
+							tripData.setX((long)(Math.random()*1000));
+						}else{
+							tripData.setX(Long.parseLong(value));
+						}
+						
 						break;
 					}
 					case "yAxis": {
-						tripData.setY(Long.parseLong(value));
+						if(value.equals("")){ 
+							tripData.setY((long)(Math.random()*1000));
+						}else{
+							tripData.setY(Long.parseLong(value));
+						}
+						
 						break;
 					}
 					case "zAxis": {
-						tripData.setZ(Long.parseLong(value));
+						if(value.equals("")){ 
+							tripData.setZ((long)(Math.random()*1000));
+						}else{
+							tripData.setZ(Long.parseLong(value));
+						}
+						
 						break;
 					}
 					case "temp": {
-						tripData.setTemperature(Long.parseLong(value));
+						if(value.equals("")){ 
+							tripData.setTemperature((long)(Math.random()*100));
+						}else{
+							tripData.setTemperature(Long.parseLong(value));
+						}
 						break;
 					}
 					case "lat": {
-						tripData.setLatitude(Double.parseDouble(value));
+						if(value.equals("")){ 
+							tripData.setLatitude((double)(Math.random()*10000000));
+						}else{
+							tripData.setLatitude(Double.parseDouble(value));
+						}
 					}
 					case "lng": {
-						tripData.setLongitude(Double.parseDouble(value));
+						if(value.equals("")){ 
+							tripData.setLongitude((double)(Math.random()*10000000));
+						}else{
+							tripData.setLongitude(Double.parseDouble(value));
+						}
+						
 					}
 					case "distance": {
 						tripData.setDistance(Double.parseDouble(value));
@@ -145,15 +187,29 @@ public class ContingencyTripDataServlet extends HttpServlet {
 						break;
 					}
 					case "engineRPM": {
-						tripData.setEngineRPM(Double.parseDouble(value));
+						if(value.equals("")){ 
+							tripData.setEngineRPM((double) (Math.random()*4001));
+						}else{
+							tripData.setEngineRPM(Double.parseDouble(value));
+						}
+						
 						break;
 					}
 					case "engineLoad" :{
-						tripData.setEngineLoad(Double.parseDouble(value));
+						if(value.equals("")){ 
+							tripData.setEngineLoad((double) (Math.random()*4001));
+						}else{
+							tripData.setEngineLoad(Double.parseDouble(value));
+						}
 						break;
 					}
 					case "speed": {
-						tripData.setSpeed(Double.parseDouble(value));
+						if(value.equals("")){ 
+							tripData.setSpeed((double) (Math.random()*60));
+						}else{
+							tripData.setSpeed(Double.parseDouble(value));
+						}
+						
 						break;
 					}
 					case "fuelLevel": {
@@ -161,26 +217,54 @@ public class ContingencyTripDataServlet extends HttpServlet {
 						break;
 					}
 					case "xAxis": {
-						tripData.setX(Long.parseLong(value));
+						if(value.equals("")){ 
+							tripData.setX((long)(Math.random()*1000));
+						}else{
+							tripData.setX(Long.parseLong(value));
+						}
+						
 						break;
 					}
 					case "yAxis": {
-						tripData.setY(Long.parseLong(value));
+						if(value.equals("")){ 
+							tripData.setY((long)(Math.random()*1000));
+						}else{
+							tripData.setY(Long.parseLong(value));
+						}
+						
 						break;
 					}
 					case "zAxis": {
-						tripData.setZ(Long.parseLong(value));
+						if(value.equals("")){ 
+							tripData.setZ((long)(Math.random()*1000));
+						}else{
+							tripData.setZ(Long.parseLong(value));
+						}
+						
 						break;
 					}
 					case "temp": {
-						tripData.setTemperature(Long.parseLong(value));
+						if(value.equals("")){ 
+							tripData.setTemperature((long)(Math.random()*100));
+						}else{
+							tripData.setTemperature(Long.parseLong(value));
+						}
 						break;
 					}
 					case "lat": {
-						tripData.setLatitude(Double.parseDouble(value));
+						if(value.equals("")){ 
+							tripData.setLatitude((double)(Math.random()*10000000));
+						}else{
+							tripData.setLatitude(Double.parseDouble(value));
+						}
 					}
 					case "lng": {
-						tripData.setLongitude(Double.parseDouble(value));
+						if(value.equals("")){ 
+							tripData.setLongitude((double)(Math.random()*10000000));
+						}else{
+							tripData.setLongitude(Double.parseDouble(value));
+						}
+						
 					}
 					case "distance": {
 						tripData.setDistance(Double.parseDouble(value));
