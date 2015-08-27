@@ -73,7 +73,7 @@ sap.ui.core.mvc.Controller.extend("Route.view.Master", {
 	loadDetailView: function() {
 		this.getRouter().myNavToWithoutHash({
 			currentView: this.getView(),
-			targetViewName: "Vehicle.view.Detail",
+			targetViewName: "Route.view.Detail",
 			targetViewType: "XML"
 		});
 	},
@@ -99,7 +99,7 @@ sap.ui.core.mvc.Controller.extend("Route.view.Master", {
 		} else {
 			this.getRouter().myNavToWithoutHash({
 				currentView: this.getView(),
-				targetViewName: "Vehicle.view.NotFound",
+				targetViewName: "Route.view.NotFound",
 				targetViewType: "XML"
 			});
 		}
